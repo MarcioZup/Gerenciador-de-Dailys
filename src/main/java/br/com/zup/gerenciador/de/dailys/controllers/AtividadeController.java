@@ -41,5 +41,10 @@ public class AtividadeController {
         atividadeService.deletarAtividade(id);
     }
 
+    @PutMapping
+    public Atividade atualizarAtividade(@RequestBody Atividade atividade){
+        return  atividadeService.atualizarAtividade(atividade);
+    }
+
 
 }
