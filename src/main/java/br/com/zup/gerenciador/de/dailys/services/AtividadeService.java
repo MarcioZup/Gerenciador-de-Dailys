@@ -29,13 +29,6 @@ public class AtividadeService {
         return atividadeRepository.findAll();
     }
 
-   public Atividade buscarAtividadePorId(Long id){
-        Optional<Atividade>atividadeOptional = atividadeRepository.findById(id);
-        if(atividadeOptional.isEmpty()){
-            throw new AtividadeNaoEncontrada("Atividade não encontrada");
-        }
-        return atividadeOptional.get();
-   }
    public Atividade atualizarAtividade(Atividade atividade){
         return atividadeRepository.save(atividade);
    }
