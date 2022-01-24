@@ -36,5 +36,8 @@ public class AtividadeService {
         }
         return atividadeOptional.get();
    }
+   public Atividade atualizarAtividade(Atividade atividade){
+        return atividadeRepository.save(atividade);
+   }
 
 }
