@@ -25,10 +25,9 @@ public class AtividadeService {
         atividadeRepository.deleteById(id);
     }
 
-   public Atividade exibirAtividade(){
-        Atividade atividade = (Atividade) atividadeRepository.findAll();
-        return atividade;
-   }
+    public Iterable<Atividade> exibirAtividades() {
+        return atividadeRepository.findAll();
+    }
 
    public Atividade buscarAtividadePorId(Long id){
         Optional<Atividade>atividadeOptional = atividadeRepository.findById(id);
