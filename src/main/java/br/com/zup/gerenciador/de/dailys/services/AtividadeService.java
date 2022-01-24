@@ -1,5 +1,6 @@
 package br.com.zup.gerenciador.de.dailys.services;
 
+import br.com.zup.gerenciador.de.dailys.exceptions.AtividadeNaoEncontrada;
 import br.com.zup.gerenciador.de.dailys.model.Atividade;
 import br.com.zup.gerenciador.de.dailys.repositories.AtividadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
