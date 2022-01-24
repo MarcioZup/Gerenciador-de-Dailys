@@ -35,5 +35,11 @@ public class AtividadeController {
         return atividadeService.exibirAtividades();
     }
 
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletarAtividade(@RequestParam Long id){
+        atividadeService.deletarAtividade(id);
+    }
+
 
 }
