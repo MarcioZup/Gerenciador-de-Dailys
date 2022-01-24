@@ -14,5 +14,13 @@ public class AtividadeService {
     public Atividade salvarAtividade(Atividade atividade){
         return atividadeRepository.save(atividade);
     }
+    public Atividade deletarAtividade(Long id){
+        if(atividadeRepository.existsById(id)){
+            throw new AtividadeNaoEncontrada("Atividade não encontrada");
+        }
+        atividadeRepository.deleteById(id);
+
+
+    }
 
 }
