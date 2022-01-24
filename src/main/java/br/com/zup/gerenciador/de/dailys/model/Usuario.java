@@ -2,6 +2,7 @@ package br.com.zup.gerenciador.de.dailys.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario {
@@ -10,8 +11,11 @@ public class Usuario {
     private String email;
     private String senha;
     private String nome;
+    @OneToMany
     private Atividade taskAtual;
+    @OneToMany
     private Atividade proximaTask;
+    @OneToMany
     private Atividade impedimento;
 
     public Usuario() {
