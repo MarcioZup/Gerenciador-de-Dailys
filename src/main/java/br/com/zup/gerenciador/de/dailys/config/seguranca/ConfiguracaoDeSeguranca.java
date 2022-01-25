@@ -18,6 +18,7 @@ public class ConfiguracaoDeSeguranca extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.csrf().disable();
 
         httpSecurity.authorizeRequests()
                 .antMatchers(HttpMethod.POST, ENDPOINT_POST_PUBLICO).permitAll()
