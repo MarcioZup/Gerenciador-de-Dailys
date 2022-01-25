@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import java.util.Date;
 
 @Entity
-public class Atividade {
+public class TaskAtual {
 
     @Id
     private Long id;
@@ -13,7 +13,7 @@ public class Atividade {
     private Date dataInicio;
     private Date previsaoFim;
 
-    public Atividade() {
+    public TaskAtual() {
     }
 
     public Long getId() {
