@@ -1,4 +1,4 @@
-package br.com.zup.gerenciador.de.dailys.model;
+package br.com.zup.gerenciador.de.dailys.impedimento;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,14 +17,14 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProximaTask {
+public class Impedimento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descricao;
-    private Date dataInicio;
-    private Date previsaoFim;
-
 
 }
+
+
+

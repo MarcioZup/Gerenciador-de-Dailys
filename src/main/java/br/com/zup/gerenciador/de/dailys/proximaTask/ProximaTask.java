@@ -1,11 +1,14 @@
-package br.com.zup.gerenciador.de.dailys.model;
+package br.com.zup.gerenciador.de.dailys.proximaTask;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 
 @Entity
@@ -14,7 +17,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TaskAtual {
+public class ProximaTask {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +25,6 @@ public class TaskAtual {
     private String descricao;
     private Date dataInicio;
     private Date previsaoFim;
-
-    @ManyToOne(optional = false)
-    private Usuario usuarios;
 
 
 }

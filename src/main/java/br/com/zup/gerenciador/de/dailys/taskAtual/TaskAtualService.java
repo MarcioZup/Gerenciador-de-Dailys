@@ -1,7 +1,7 @@
-package br.com.zup.gerenciador.de.dailys.service;
+package br.com.zup.gerenciador.de.dailys.taskAtual;
 
-import br.com.zup.gerenciador.de.dailys.model.TaskAtual;
-import br.com.zup.gerenciador.de.dailys.repository.TaskAtualRepository;
+import br.com.zup.gerenciador.de.dailys.taskAtual.TaskAtual;
+import br.com.zup.gerenciador.de.dailys.taskAtual.TaskAtualRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

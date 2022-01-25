@@ -1,7 +1,5 @@
-package br.com.zup.gerenciador.de.dailys.service;
+package br.com.zup.gerenciador.de.dailys.usuario;
 
-import br.com.zup.gerenciador.de.dailys.model.Usuario;
-import br.com.zup.gerenciador.de.dailys.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

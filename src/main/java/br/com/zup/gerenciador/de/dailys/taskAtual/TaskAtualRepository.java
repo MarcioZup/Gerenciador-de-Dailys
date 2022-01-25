@@ -1,6 +1,6 @@
-package br.com.zup.gerenciador.de.dailys.repository;
+package br.com.zup.gerenciador.de.dailys.taskAtual;
 
-import br.com.zup.gerenciador.de.dailys.model.TaskAtual;
+import br.com.zup.gerenciador.de.dailys.taskAtual.TaskAtual;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
