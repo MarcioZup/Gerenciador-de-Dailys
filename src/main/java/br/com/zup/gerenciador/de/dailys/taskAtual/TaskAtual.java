@@ -25,7 +25,6 @@ public class TaskAtual {
     private Date previsaoFim;
 
     @ManyToOne(optional = false)
-    private Usuario usuarios;
-
+    private Usuario usuario;
 
 }
