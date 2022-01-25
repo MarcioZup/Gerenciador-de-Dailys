@@ -1,5 +1,6 @@
-package br.com.zup.gerenciador.de.dailys.model;
+package br.com.zup.gerenciador.de.dailys.taskAtual;
 
+import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +25,6 @@ public class TaskAtual {
     private Date previsaoFim;
 
     @ManyToOne(optional = false)
-    private Usuario usuarios;
-
+    private Usuario usuario;
 
 }

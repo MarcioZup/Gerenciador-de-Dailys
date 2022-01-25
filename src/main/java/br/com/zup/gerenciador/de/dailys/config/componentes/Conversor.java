@@ -1,4 +1,4 @@
-package br.com.zup.gerenciador.de.dailys.componentes;
+package br.com.zup.gerenciador.de.dailys.config.componentes;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

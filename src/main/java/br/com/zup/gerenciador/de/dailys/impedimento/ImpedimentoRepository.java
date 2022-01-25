@@ -1,6 +1,6 @@
-package br.com.zup.gerenciador.de.dailys.repository;
+package br.com.zup.gerenciador.de.dailys.impedimento;
 
-import br.com.zup.gerenciador.de.dailys.model.Impedimento;
+import br.com.zup.gerenciador.de.dailys.impedimento.Impedimento;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

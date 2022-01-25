@@ -1,5 +1,8 @@
-package br.com.zup.gerenciador.de.dailys.model;
+package br.com.zup.gerenciador.de.dailys.usuario;
 
+import br.com.zup.gerenciador.de.dailys.impedimento.Impedimento;
+import br.com.zup.gerenciador.de.dailys.proximaTask.ProximaTask;
+import br.com.zup.gerenciador.de.dailys.taskAtual.TaskAtual;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

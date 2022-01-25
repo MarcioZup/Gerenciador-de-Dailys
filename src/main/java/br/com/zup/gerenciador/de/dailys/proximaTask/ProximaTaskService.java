@@ -1,7 +1,5 @@
-package br.com.zup.gerenciador.de.dailys.services;
+package br.com.zup.gerenciador.de.dailys.proximaTask;
 
-import br.com.zup.gerenciador.de.dailys.model.ProximaTask;
-import br.com.zup.gerenciador.de.dailys.repositories.ProximaTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

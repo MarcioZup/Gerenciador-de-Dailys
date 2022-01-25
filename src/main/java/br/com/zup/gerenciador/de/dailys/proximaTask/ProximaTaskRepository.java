@@ -1,6 +1,5 @@
-package br.com.zup.gerenciador.de.dailys.repositories;
+package br.com.zup.gerenciador.de.dailys.proximaTask;
 
-import br.com.zup.gerenciador.de.dailys.model.ProximaTask;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
