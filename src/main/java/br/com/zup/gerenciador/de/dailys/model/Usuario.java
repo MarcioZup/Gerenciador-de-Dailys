@@ -1,11 +1,20 @@
 package br.com.zup.gerenciador.de.dailys.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Usuario {
 
@@ -20,56 +29,4 @@ public class Usuario {
     @OneToMany(cascade = CascadeType.MERGE)
     private List<Impedimento> impedimentos;
 
-
-
-    public Usuario() {
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public List<TaskAtual> getTasksAtuais() {
-        return tasksAtuais;
-    }
-
-    public void setTasksAtuais(List<TaskAtual> tasksAtuais) {
-        this.tasksAtuais = tasksAtuais;
-    }
-
-    public List<ProximaTask> getProximaTasks() {
-        return proximaTasks;
-    }
-
-    public void setProximaTasks(List<ProximaTask> proximaTasks) {
-        this.proximaTasks = proximaTasks;
-    }
-
-    public List<Impedimento> getImpedimentos() {
-        return impedimentos;
-    }
-
-    public void setImpedimentos(List<Impedimento> impedimentos) {
-        this.impedimentos = impedimentos;
-    }
 }
