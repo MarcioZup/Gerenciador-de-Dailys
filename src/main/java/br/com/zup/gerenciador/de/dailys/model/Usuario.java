@@ -11,12 +11,14 @@ public class Usuario {
     private String email;
     private String senha;
     private String nome;
-    @OneToMany
-    private Atividade taskAtual;
-    @OneToMany
-    private Atividade proximaTask;
-    @OneToMany
-    private Atividade impedimento;
+    @OneToMany(cascade = CascadeType.MERGE)
+    private List<TaskAtual> tasksAtuais;
+    @OneToMany(cascade = CascadeType.MERGE)
+    private List<ProximaTask> proximaTasks;
+    @OneToMany(cascade = CascadeType.MERGE)
+    private List<Impedimento> impedimentos;
+
+
 
     public Usuario() {
     }
@@ -45,27 +47,27 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public Atividade getTaskAtual() {
-        return taskAtual;
+    public List<TaskAtual> getTasksAtuais() {
+        return tasksAtuais;
     }
 
-    public void setTaskAtual(Atividade taskAtual) {
-        this.taskAtual = taskAtual;
+    public void setTasksAtuais(List<TaskAtual> tasksAtuais) {
+        this.tasksAtuais = tasksAtuais;
     }
 
-    public Atividade getProximaTask() {
-        return proximaTask;
+    public List<ProximaTask> getProximaTasks() {
+        return proximaTasks;
     }
 
-    public void setProximaTask(Atividade proximaTask) {
-        this.proximaTask = proximaTask;
+    public void setProximaTasks(List<ProximaTask> proximaTasks) {
+        this.proximaTasks = proximaTasks;
     }
 
-    public Atividade getImpedimento() {
-        return impedimento;
+    public List<Impedimento> getImpedimentos() {
+        return impedimentos;
     }
 
-    public void setImpedimento(Atividade impedimento) {
-        this.impedimento = impedimento;
+    public void setImpedimentos(List<Impedimento> impedimentos) {
+        this.impedimentos = impedimentos;
     }
 }
