@@ -1,5 +1,6 @@
 package br.com.zup.gerenciador.de.dailys.config.seguranca.jwt;
 
+import br.com.zup.gerenciador.de.dailys.config.seguranca.UsuarioLogado;
 import br.com.zup.gerenciador.de.dailys.config.seguranca.jwt.exceptions.AcessoNegadoException;
 import br.com.zup.gerenciador.de.dailys.usuario.dtos.LoginDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,6 +10,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -41,6 +44,19 @@ public class FiltroDeAutenticacaoJwt extends UsernamePasswordAuthenticationFilte
         }catch (IOException e){
             throw new AcessoNegadoException();
         }
+    }
+
+    @Override
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
+                                            Authentication authResult) throws IOException, ServletException {
+        UsuarioLogado usuarioLogado = (UsuarioLogado) authResult.getPrincipal();
+        String username = usuarioLogado.getUsername();
+        String email = usuarioLogado.getEmail();
+
+        String token = jwtComponent.gerarToken(username, email);
+
+        response.setHeader("Access-Control-Expose-Headers","Authorization");
+        response.addHeader("Authorization", "Token "+token);
     }
 
 }
