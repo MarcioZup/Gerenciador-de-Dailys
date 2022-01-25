@@ -1,13 +1,13 @@
 package br.com.zup.gerenciador.de.dailys.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 public class TaskAtual {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descricao;
     private Date dataInicio;
@@ -46,5 +46,16 @@ public class TaskAtual {
 
     public void setPrevisaoFim(Date previsaoFim) {
         this.previsaoFim = previsaoFim;
+    }
+
+    @ManyToOne(optional = false)
+    private Usuario usuarios;
+
+    public Usuario getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(Usuario usuarios) {
+        this.usuarios = usuarios;
     }
 }

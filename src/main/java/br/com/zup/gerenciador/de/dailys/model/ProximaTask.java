@@ -1,6 +1,8 @@
 package br.com.zup.gerenciador.de.dailys.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 
@@ -8,6 +10,7 @@ import java.util.Date;
 public class ProximaTask {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descricao;
     private Date dataInicio;
