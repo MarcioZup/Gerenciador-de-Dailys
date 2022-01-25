@@ -22,4 +22,9 @@ public class UsuarioService {
 
         return usuarioRepository.save(usuario);
     }
+
+    public Iterable<Usuario> exibirUsuarios(){
+        return usuarioRepository.findAll();
+    }
+
 }
