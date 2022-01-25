@@ -21,5 +21,8 @@ public class UsuarioService {
 
     }
 
+    public void deletarUsuario (String email){
+        usuarioRepository.deleteById(email);
 
+    }
 }
