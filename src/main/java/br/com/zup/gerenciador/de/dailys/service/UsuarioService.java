@@ -27,4 +27,8 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
+    public void deletarUsuario(String email){
+        usuarioRepository.deleteById(email);
+    }
+
 }
