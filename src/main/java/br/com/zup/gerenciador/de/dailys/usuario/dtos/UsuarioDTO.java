@@ -1,4 +1,4 @@
-package br.com.zup.gerenciador.de.dailys.usuario;
+package br.com.zup.gerenciador.de.dailys.usuario.dtos;
 
 import br.com.zup.gerenciador.de.dailys.impedimento.Impedimento;
 import br.com.zup.gerenciador.de.dailys.proximaTask.ProximaTask;
@@ -20,8 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 
 @Entity
-public class Usuario {
-
+public class UsuarioDTO {
     @Id
     private String email;
     private String senha;
@@ -33,5 +32,4 @@ public class Usuario {
     private List<ProximaTask> proximaTasks;
     @OneToMany(cascade = CascadeType.MERGE)
     private List<Impedimento> impedimentos;
-
 }
