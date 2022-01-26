@@ -25,6 +25,7 @@ public class Usuario {
     private String email;
     private String senha;
     private String nome;
+    private String nomeDaSquad;
     @OneToMany(cascade = CascadeType.MERGE)
     private List<TaskAtual> tasksAtuais;
     @OneToMany(cascade = CascadeType.MERGE)
