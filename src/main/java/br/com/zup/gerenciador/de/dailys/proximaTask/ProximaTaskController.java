@@ -39,4 +39,11 @@ public class ProximaTaskController {
 
     }
 
+    @PutMapping
+    public ProximaTask atualizarTask (@RequestBody ProximaTaskDTO proximaTaskDTO){
+        ProximaTask proximaTask = modelMapper.map(proximaTaskDTO, ProximaTask.class);
+
+        return proximaTaskService.atualizarProximaTask(proximaTask);
+    }
+
 }
