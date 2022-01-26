@@ -5,9 +5,11 @@ import br.com.zup.gerenciador.de.dailys.config.seguranca.jwt.FiltroDeAutorizacao
 import br.com.zup.gerenciador.de.dailys.config.seguranca.jwt.JwtComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,6 +18,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+@Configuration
+@EnableWebSecurity
 public class ConfiguracaoDeSeguranca extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -25,12 +29,16 @@ public class ConfiguracaoDeSeguranca extends WebSecurityConfigurerAdapter {
 
     private static final String[] ENDPOINT_POST_PUBLICO = {
             "/usuario",
-            "/task"
+            "/proximaTask",
+            "/taskAtual",
+            "/impedimento"
     };
 
     private static final String[] ENDPOINT_GET_PUBLICO = {
-            "/usuarios",
-            "/tasks"
+            "/usuario",
+            "/taskAtual",
+            "/proximaTask",
+            "/impedimento"
     };
 
     @Override
@@ -41,11 +49,8 @@ public class ConfiguracaoDeSeguranca extends WebSecurityConfigurerAdapter {
 
         httpSecurity.authorizeRequests()
                 .antMatchers(HttpMethod.POST, ENDPOINT_POST_PUBLICO).permitAll()
-                .anyRequest().authenticated();
-
-        httpSecurity.authorizeRequests()
-                .antMatchers(HttpMethod.POST, ENDPOINT_GET_PUBLICO).permitAll()
-                .anyRequest().authenticated();
+                .and().authorizeRequests().antMatchers(HttpMethod.GET, ENDPOINT_GET_PUBLICO)
+                .permitAll().anyRequest().authenticated();
 
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
