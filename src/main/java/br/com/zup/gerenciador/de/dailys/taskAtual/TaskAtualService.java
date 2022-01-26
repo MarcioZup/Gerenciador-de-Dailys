@@ -23,6 +23,9 @@ public class TaskAtualService {
     }
 
     public void deletartaskAtual(Long id ){
+        if(!taskAtualRepository.existsById(id)){
+            throw  new TaskAtualInexistente("Task atual inexistente");
+        }
         taskAtualRepository.deleteById(id);
     }
 
