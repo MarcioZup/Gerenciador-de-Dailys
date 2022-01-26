@@ -23,9 +23,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 
-@Entity
 public class UsuarioDTO {
-    @Id
     @Email
     @NotBlank
     private String email;
@@ -35,10 +33,7 @@ public class UsuarioDTO {
     private String nome;
     @NotBlank
     private String nomeDaSquad;
-    @OneToMany(cascade = CascadeType.MERGE)
     private List<TaskAtual> tasksAtuais;
-    @OneToMany(cascade = CascadeType.MERGE)
     private List<ProximaTask> proximaTasks;
-    @OneToMany(cascade = CascadeType.MERGE)
     private List<Impedimento> impedimentos;
 }

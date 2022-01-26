@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
 
 @Getter
 @Setter
@@ -16,11 +15,9 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class ImpedimentoDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private String descricao;
 
-    @ManyToOne(optional = false)
     private Usuario usuario;
 
 }

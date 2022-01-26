@@ -8,24 +8,17 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
-
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TaskAtualDTO {
-    @Entity
 
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public class TaskAtual {
-
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private String descricao;
         private Date dataInicio;
         private Date previsaoFim;
 
-        @ManyToOne(optional = false)
         private Usuario usuario;
 
-    }
+
 }
