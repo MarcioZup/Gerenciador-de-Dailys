@@ -27,6 +27,9 @@ public class UsuarioService {
     }
 
     public void deletarUsuario (String email){
+        if(!usuarioRepository.existsById(email)){
+            throw new UsuarioInexistente("Usuario não encontrado");
+        }
         usuarioRepository.deleteById(email);
 
     }
