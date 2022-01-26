@@ -16,7 +16,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProximaTaskEntradaDTO {
+public class ProximaTaskDTO {
 
     @NotBlank
     private String descricao;

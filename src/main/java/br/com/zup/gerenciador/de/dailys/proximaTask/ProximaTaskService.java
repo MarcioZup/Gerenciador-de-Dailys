@@ -22,4 +22,5 @@ public class ProximaTaskService {
     public void deletarProximaTask(Long id) {
         proximaTaskRepository.deleteById(id);
     }
+
 }
