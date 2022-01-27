@@ -7,8 +7,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-@Entity
 
 @Getter
 @Setter
@@ -16,11 +18,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class ImpedimentoDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@NotNull
+@NotBlank
+@Size(min = 10, max = 200, message = "Favor digitar um nome entre 10 a 200 caracteres")
     private String descricao;
-
-    @ManyToOne(optional = false)
+    @NotNull
     private Usuario usuario;
 
 }
