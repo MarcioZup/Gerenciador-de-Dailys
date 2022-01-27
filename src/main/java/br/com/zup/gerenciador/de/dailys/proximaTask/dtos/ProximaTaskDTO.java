@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Getter
@@ -19,13 +20,13 @@ import java.util.Date;
 public class ProximaTaskDTO {
 
     @NotBlank
+    @Size(min = 10, max = 200, message = "Favor digitar uma descrição entre 10 a 200 caracteres")
     private String descricao;
     @NotNull
     private Date dataInicio;
     @NotNull
     private Date previsaoFim;
     @Valid
-    @NotBlank
     private Usuario usuario;
 
 }
