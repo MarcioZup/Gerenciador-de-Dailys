@@ -27,9 +27,11 @@ public class UsuarioDTO {
     @Email
     @NotBlank
     private String email;
+    @NotBlank
+    @NotNull
     private String senha;
     @NotNull
-    @Size(min = 2, max = 20, message = "Favor digitar um nome entre 2 a 20 caracteres")
+    @Size(min = 3, max = 20, message = "Favor digitar um nome entre 2 a 20 caracteres")
     private String nome;
     @NotBlank
     private String nomeDaSquad;
