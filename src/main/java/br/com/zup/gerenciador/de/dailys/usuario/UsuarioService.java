@@ -13,6 +13,7 @@ public class UsuarioService {
     BCryptPasswordEncoder encoder;
 
     public Usuario salvarUsuario (Usuario usuario){
+        validarEmail(usuario.getEmail());
 
         String senhaCriptografada = encoder.encode(usuario.getSenha());
         usuario.setSenha(senhaCriptografada);
