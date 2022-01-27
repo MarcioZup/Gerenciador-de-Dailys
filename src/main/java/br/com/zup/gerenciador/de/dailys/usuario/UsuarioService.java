@@ -34,4 +34,10 @@ public class UsuarioService {
 
     }
 
+    public void validarEmail(String email){
+        if(usuarioRepository.countByEmail(email)>0){
+            throw new EmailCadastrado("Email já cadastrado");
+        }
+    }
+
 }
