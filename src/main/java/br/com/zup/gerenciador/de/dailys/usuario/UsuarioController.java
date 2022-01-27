@@ -1,7 +1,6 @@
 package br.com.zup.gerenciador.de.dailys.usuario;
 
 
-import br.com.zup.gerenciador.de.dailys.usuario.UsuarioService;
 import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsuarioDTO;
 import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsuarioFiltroDTO;
 import org.modelmapper.ModelMapper;
@@ -10,8 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @RestController
 @RequestMapping("/usuario")
@@ -30,10 +28,10 @@ public class UsuarioController {
         modelMapper.map(usuarioService.salvarUsuario(novoUsuario), UsuarioDTO.class);
     }
 
-    @GetMapping
-    public UsuarioDTO exibirUsuarioPorEmail(@PathVariable String email){
+    @GetMapping("/{email}")
+    public UsuarioFiltroDTO exibirUsuarioPorEmail(@PathVariable String email) {
         Usuario usuario = usuarioService.exibirUsuarioPorEmail(email);
-        return modelMapper.map(usuario, UsuarioDTO.class);
+        return modelMapper.map(usuario, UsuarioFiltroDTO.class);
     }
 
     @DeleteMapping("/{email}")
