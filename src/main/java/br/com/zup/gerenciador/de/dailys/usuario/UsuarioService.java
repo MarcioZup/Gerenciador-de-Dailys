@@ -1,5 +1,6 @@
 package br.com.zup.gerenciador.de.dailys.usuario;
 
+import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,15 @@ public class UsuarioService {
                 throw new EmailCadastrado("Email já cadastrado");
             }else throw new DominioNaoPermitidoException("Esse domínio não tem acesso permitido a esse sistema");
         }
+    }
+
+    public Usuario exibirUsuarioPorEmail(String email){
+        for(Usuario usuario : usuarioRepository.findAll()){
+            if(usuario.getEmail().equals(email)){
+                return usuario;
+            }
+        }
+        throw new UsuarioInexistente("Usuário não encontrado");
     }
 
 }
