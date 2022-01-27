@@ -40,8 +40,8 @@ public class UsuarioService {
         if (email.contains("@zup.com.br")) {
             if (usuarioRepository.countByEmail(email) > 0) {
                 throw new EmailCadastrado("Email já cadastrado");
-            }else throw new DominioNaoPermitidoException("Esse domínio não tem acesso permitido a esse sistema");
-        }
+            }
+        }else throw new DominioNaoPermitidoException("Esse domínio não tem acesso permitido a esse sistema");
     }
 
     public Usuario exibirUsuarioPorEmail(String email){
