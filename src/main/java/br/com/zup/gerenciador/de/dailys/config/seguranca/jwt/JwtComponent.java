@@ -17,10 +17,10 @@ public class JwtComponent {
     @Value("${jwt.milissegundos}")
     private Long milissegundos;
 
-    public String gerarToken(String email, String senha){
+    public String gerarToken(String userName, String senha){
         Date vencimento = new Date(System.currentTimeMillis()+milissegundos);
 
-        String token = Jwts.builder().setSubject(email)
+        String token = Jwts.builder().setSubject(userName)
                 .claim("idUsuario", senha).setExpiration(vencimento).claim("aleatorio", "anything")
                 .signWith(SignatureAlgorithm.HS512, segredo.getBytes()).compact();
 
