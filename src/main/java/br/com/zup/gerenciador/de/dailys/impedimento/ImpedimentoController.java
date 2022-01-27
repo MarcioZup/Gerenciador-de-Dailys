@@ -37,10 +37,11 @@ public class ImpedimentoController {
         return listaDeImpedimentos;
     }
 
-    @PutMapping
-    public ImpedimentoDTO atualizarImpedimento(@RequestBody ImpedimentoDTO impedimentoDTO){
-        Impedimento impedimento = modelMapper.map(impedimentoDTO, Impedimento.class);
-        return modelMapper.map(impedimentoService.atualizarImpedimento(impedimento), ImpedimentoDTO.class);
+    @PutMapping("/{id}")
+    public ImpedimentoDTO atualizarImpedimento(@PathVariable Long id, @RequestBody ImpedimentoDTO impedimentoDTO){
+            Impedimento impedimento = impedimentoService.alterarDescricaoImpedimento(id, impedimentoDTO);
+
+            return modelMapper.map(impedimento, ImpedimentoDTO.class);
     }
 
     @DeleteMapping("/{id}")
