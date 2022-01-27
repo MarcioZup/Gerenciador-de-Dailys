@@ -24,7 +24,7 @@ public class UsuarioController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public cadastrarUsuario(@RequestBody @Valid UsuarioDTO usuario) {
+    public void cadastrarUsuario(@RequestBody @Valid UsuarioDTO usuario) {
         Usuario novoUsuario = modelMapper.map(usuario, Usuario.class);
         modelMapper.map(usuarioService.salvarUsuario(novoUsuario), UsuarioDTO.class);
     }
