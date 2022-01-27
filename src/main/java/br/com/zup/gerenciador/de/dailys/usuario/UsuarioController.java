@@ -34,7 +34,7 @@ public class UsuarioController {
         return modelMapper.map(usuario, UsuarioFiltroDTO.class);
     }
 
-    @GetMapping("/{nomeDaSquad}")
+    @GetMapping("squad/{nomeDaSquad}")
     public UsuarioFiltroDTO exibirUsuarioPorSquad(@PathVariable String nomeDaSquad) {
         Usuario usuario = usuarioService.exibirUsuarioPorSquad(nomeDaSquad);
         return modelMapper.map(usuario, UsuarioFiltroDTO.class);
