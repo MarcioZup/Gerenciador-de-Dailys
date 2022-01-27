@@ -31,13 +31,9 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public List<UsuarioFiltroDTO> exibirUsuarios() {
-        List<UsuarioFiltroDTO> listaDeUsuarios = new ArrayList<>();
-        for (Usuario usuario : usuarioService.exibirUsuario()) {
-            UsuarioFiltroDTO usuarioFiltroDTO = modelMapper.map(usuario, UsuarioFiltroDTO.class);
-            listaDeUsuarios.add(usuarioFiltroDTO);
-        }
-        return listaDeUsuarios;
+    public UsuarioDTO exibirUsuarioPorEmail(@PathVariable String email){
+        Usuario usuario = usuarioService.exibirUsuarioPorEmail(email);
+        return modelMapper.map(usuario, UsuarioDTO.class);
     }
 
     @DeleteMapping("/{email}")
