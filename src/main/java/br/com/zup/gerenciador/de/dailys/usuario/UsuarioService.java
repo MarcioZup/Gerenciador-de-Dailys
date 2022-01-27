@@ -48,4 +48,13 @@ public class UsuarioService {
         throw new UsuarioInexistente("Usuário não encontrado");
     }
 
+    public Usuario exibirUsuarioPorSquad(String nomeDaSquad){
+        for(Usuario usuario : usuarioRepository.findAll()){
+            if(usuario.getNomeDaSquad().equals(nomeDaSquad)){
+                return usuario;
+            }
+        }
+        throw new UsuarioInexistente("Usuário não encontrado");
+    }
+
 }

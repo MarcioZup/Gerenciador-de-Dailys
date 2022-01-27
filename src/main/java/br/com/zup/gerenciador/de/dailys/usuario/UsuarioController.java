@@ -34,6 +34,12 @@ public class UsuarioController {
         return modelMapper.map(usuario, UsuarioFiltroDTO.class);
     }
 
+    @GetMapping("/{email}")
+    public UsuarioFiltroDTO exibirUsuarioPorSquad(@PathVariable String nomeDaSquad) {
+        Usuario usuario = usuarioService.exibirUsuarioPorSquad(nomeDaSquad);
+        return modelMapper.map(usuario, UsuarioFiltroDTO.class);
+    }
+
     @DeleteMapping("/{email}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarUsuario(@PathVariable String email) {
