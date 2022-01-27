@@ -22,13 +22,16 @@ public class ProximaTaskController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ProximaTask salvarTask(@RequestBody @Valid ProximaTaskDTO proximaTaskEntradaDTO){
+
         ProximaTask proximaTask = modelMapper.map(proximaTaskEntradaDTO, ProximaTask.class);
 
         return proximaTaskService.salvarProximaTask(proximaTask);
+
     }
 
     @GetMapping
     public List<ProximaTaskDTO> exibirProximasTasks(){
+
         List<ProximaTaskDTO> listasDeProximasTasks = new ArrayList<>();
 
         for (ProximaTask proximaTask: proximaTaskService.exibirProximasTasks()) {
@@ -41,9 +44,19 @@ public class ProximaTaskController {
 
     @PutMapping
     public ProximaTask atualizarTask (@RequestBody ProximaTaskDTO proximaTaskDTO){
+
         ProximaTask proximaTask = modelMapper.map(proximaTaskDTO, ProximaTask.class);
 
         return proximaTaskService.atualizarProximaTask(proximaTask);
+
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletarProximaTask (@PathVariable Long id){
+
+        proximaTaskService.deletarProximaTask(id);
+
     }
 
 }

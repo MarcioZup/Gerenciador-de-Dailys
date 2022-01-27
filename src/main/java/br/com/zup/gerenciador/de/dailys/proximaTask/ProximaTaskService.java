@@ -9,18 +9,26 @@ public class ProximaTaskService {
     private ProximaTaskRepository proximaTaskRepository;
 
     public ProximaTask salvarProximaTask(ProximaTask proximaTask) {
+
         return proximaTaskRepository.save(proximaTask);
+
     }
 
     public Iterable<ProximaTask> exibirProximasTasks() {
+
         return proximaTaskRepository.findAll();
+
     }
     public ProximaTask atualizarProximaTask(ProximaTask proximaTask){
+
         return proximaTaskRepository.save(proximaTask);
+
     }
 
     public void deletarProximaTask(Long id) {
+
         proximaTaskRepository.deleteById(id);
+
     }
 
 }
