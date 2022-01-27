@@ -13,6 +13,7 @@ public class UsuarioService {
     BCryptPasswordEncoder encoder;
 
     public Usuario salvarUsuario (Usuario usuario){
+        validarEmail(usuario.getEmail());
 
         String senhaCriptografada = encoder.encode(usuario.getSenha());
         usuario.setSenha(senhaCriptografada);
@@ -32,6 +33,12 @@ public class UsuarioService {
         }
         usuarioRepository.deleteById(email);
 
+    }
+
+    public void validarEmail(String email){
+        if(usuarioRepository.countByEmail(email)>0){
+            throw new EmailCadastrado("Email já cadastrado");
+        }
     }
 
 }

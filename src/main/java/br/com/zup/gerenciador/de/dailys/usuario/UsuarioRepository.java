@@ -7,4 +7,6 @@ import java.util.Optional;
 public interface UsuarioRepository extends CrudRepository<Usuario, String> {
 
     Optional<Usuario> findByEmail(String email);
+
+    Integer countByEmail(String email);
 }
