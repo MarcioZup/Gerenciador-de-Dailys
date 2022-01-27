@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.awt.image.VolatileImage;
 
 
 @RestController
@@ -46,5 +47,13 @@ public class UsuarioController {
         usuarioService.deletarUsuario(email);
     }
 
+    @PutMapping("/{email}")
+    public UsuarioFiltroDTO alterarDadosUsuario(@PathVariable String email,
+                                                @RequestBody UsuarioDTO usuarioDTO){
+            Usuario usuario = usuarioService.alterarDadosUsuario(email, usuarioDTO);
+
+            return modelMapper.map(usuario,UsuarioFiltroDTO.class);
+
+    }
 
 }
