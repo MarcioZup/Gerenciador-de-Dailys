@@ -1,8 +1,11 @@
 package br.com.zup.gerenciador.de.dailys.proximaTask;
 
-import br.com.zup.gerenciador.de.dailys.proximaTask.dtos.ProximaTaskDTO;
+import br.com.zup.gerenciador.de.dailys.proximaTask.dtos.ProximaTaskSaidaDTO;
 import br.com.zup.gerenciador.de.dailys.proximaTask.exception.ProximaTaskInexistente;
+import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
+import br.com.zup.gerenciador.de.dailys.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -11,8 +14,13 @@ import java.util.Optional;
 public class ProximaTaskService {
     @Autowired
     private ProximaTaskRepository proximaTaskRepository;
+    @Autowired
+    private UsuarioService usuarioService;
 
-    public ProximaTask salvarProximaTask(ProximaTask proximaTask) {
+    public ProximaTask salvarProximaTask(String emailUsuario) {
+        Usuario usuario = usuarioService.exibirUsuarioPorEmail(emailUsuario);
+        ProximaTask proximaTask = new ProximaTask();
+        proximaTask.setUsuario(usuario);
 
         return proximaTaskRepository.save(proximaTask);
 
@@ -23,7 +31,7 @@ public class ProximaTaskService {
         return proximaTaskRepository.findAll();
 
     }
-    public ProximaTask atualizarProximaTask(Long id, ProximaTaskDTO proximaTaskDTO){
+    public ProximaTask atualizarProximaTask(Long id, ProximaTaskSaidaDTO proximaTaskDTO){
 
         Optional<ProximaTask> proximaTaskOptional = proximaTaskRepository.findById(id);
         if (proximaTaskOptional.isEmpty()){

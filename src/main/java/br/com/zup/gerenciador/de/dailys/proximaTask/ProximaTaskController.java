@@ -1,12 +1,14 @@
 package br.com.zup.gerenciador.de.dailys.proximaTask;
 
-import br.com.zup.gerenciador.de.dailys.proximaTask.dtos.ProximaTaskDTO;
+import br.com.zup.gerenciador.de.dailys.proximaTask.dtos.ProximaTaskEntradaDTO;
+import br.com.zup.gerenciador.de.dailys.proximaTask.dtos.ProximaTaskSaidaDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,21 +23,21 @@ public class ProximaTaskController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ProximaTask salvarTask(@RequestBody @Valid ProximaTaskDTO proximaTaskEntradaDTO){
+    public ProximaTaskSaidaDTO salvarTask(@RequestBody @NotNull ProximaTaskEntradaDTO proximaTaskEntradaDTO){
+        ProximaTask proximaTask = proximaTaskService.salvarProximaTask(proximaTaskEntradaDTO.getEmailUsuario());
+        proximaTask.setDescricao(proximaTaskEntradaDTO.getDescricao());
 
-        ProximaTask proximaTask = modelMapper.map(proximaTaskEntradaDTO, ProximaTask.class);
-
-        return proximaTaskService.salvarProximaTask(proximaTask);
+        return modelMapper.map(proximaTask, ProximaTaskSaidaDTO.class);
 
     }
 
     @GetMapping
-    public List<ProximaTaskDTO> exibirProximasTasks(){
+    public List<ProximaTaskSaidaDTO> exibirProximasTasks(){
 
-        List<ProximaTaskDTO> listasDeProximasTasks = new ArrayList<>();
+        List<ProximaTaskSaidaDTO> listasDeProximasTasks = new ArrayList<>();
 
         for (ProximaTask proximaTask: proximaTaskService.exibirProximasTasks()) {
-            ProximaTaskDTO proximaTaskDTO = modelMapper.map(proximaTask, ProximaTaskDTO.class);
+            ProximaTaskSaidaDTO proximaTaskDTO = modelMapper.map(proximaTask, ProximaTaskSaidaDTO.class);
             listasDeProximasTasks.add(proximaTaskDTO);
         }
         return listasDeProximasTasks;
@@ -43,10 +45,10 @@ public class ProximaTaskController {
     }
 
     @PutMapping("/{id}")
-    public ProximaTaskDTO atualizarTask (@PathVariable Long id, @RequestBody ProximaTaskDTO proximaTaskDTO){
+    public ProximaTaskSaidaDTO atualizarTask (@PathVariable Long id, @RequestBody ProximaTaskSaidaDTO proximaTaskDTO){
         ProximaTask proximaTask = proximaTaskService.atualizarProximaTask(id, proximaTaskDTO);
 
-        return modelMapper.map(proximaTask,ProximaTaskDTO.class);
+        return modelMapper.map(proximaTask, ProximaTaskSaidaDTO.class);
     }
 
     @DeleteMapping("/{id}")

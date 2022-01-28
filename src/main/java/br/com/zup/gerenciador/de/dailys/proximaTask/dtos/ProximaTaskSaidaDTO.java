@@ -1,12 +1,13 @@
-package br.com.zup.gerenciador.de.dailys.taskAtual.dtos;
+package br.com.zup.gerenciador.de.dailys.proximaTask.dtos;
 
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
+import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsarioSaidaTasksDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -15,9 +16,11 @@ import java.util.Date;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class TaskAtualDTO {
+@NoArgsConstructor
+public class ProximaTaskSaidaDTO {
+
+    private Long id;
     @NotBlank
     @Size(min = 10, max = 200, message = "Favor digitar uma descrição entre 10 a 200 caracteres")
     private String descricao;
@@ -25,8 +28,7 @@ public class TaskAtualDTO {
     private Date dataInicio;
     @NotNull
     private Date previsaoFim;
-    @NotBlank
-    private Usuario usuario;
-
+    @Valid
+    private UsarioSaidaTasksDTO usuario;
 
 }
