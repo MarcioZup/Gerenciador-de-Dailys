@@ -19,12 +19,11 @@ import javax.validation.constraints.Size;
 public class ImpedimentoDTO {
 
 
-@NotNull
-@NotBlank
-@Size(min = 10, max = 200, message = "Favor digitar uma descrição entre 10 a 200 caracteres")
-
     @NotNull
+    @NotBlank
+    @Size(min = 10, max = 200, message = "Favor digitar uma descrição entre 10 a 200 caracteres")
     private String descricao;
+    @NotNull
     private Usuario usuario;
 
 }

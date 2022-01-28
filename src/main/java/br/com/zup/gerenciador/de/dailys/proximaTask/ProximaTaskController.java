@@ -42,13 +42,11 @@ public class ProximaTaskController {
 
     }
 
-    @PutMapping
-    public ProximaTask atualizarTask (@RequestBody ProximaTaskDTO proximaTaskDTO){
+    @PutMapping("/{id}")
+    public ProximaTaskDTO atualizarTask (@PathVariable Long id, @RequestBody ProximaTaskDTO proximaTaskDTO){
+        ProximaTask proximaTask = proximaTaskService.atualizarProximaTask(id, proximaTaskDTO);
 
-        ProximaTask proximaTask = modelMapper.map(proximaTaskDTO, ProximaTask.class);
-
-        return proximaTaskService.atualizarProximaTask(proximaTask);
-
+        return modelMapper.map(proximaTask,ProximaTaskDTO.class);
     }
 
     @DeleteMapping("/{id}")

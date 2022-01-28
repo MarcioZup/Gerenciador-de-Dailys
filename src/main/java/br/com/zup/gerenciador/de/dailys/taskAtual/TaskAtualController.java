@@ -41,4 +41,11 @@ public class TaskAtualController {
     public void deletarTaskAtual(@PathVariable Long id){
         taskAtualService.deletartaskAtual(id);
     }
+
+    @PutMapping("/{id}")
+    public TaskAtualDTO atualizarTask(@PathVariable Long id, @RequestBody TaskAtualDTO taskAtualDTO){
+        TaskAtual taskAtual = taskAtualService.atualizarTaskAtual(id, taskAtualDTO);
+
+        return modelMapper.map(taskAtual, TaskAtualDTO.class);
+    }
 }

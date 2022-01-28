@@ -1,8 +1,11 @@
 package br.com.zup.gerenciador.de.dailys.usuario;
 
+import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -57,4 +60,20 @@ public class UsuarioService {
         throw new UsuarioInexistente("Usuário não encontrado");
     }
 
+    public Usuario alterarDadosUsuario(String email, UsuarioDTO usuarioNovo) {
+
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+        if (usuario.isEmpty()){
+            throw new UsuarioInexistente("Usuário não encontrado");
+        }
+        Usuario usuarioParaAtualizar = usuario.get();
+        usuarioParaAtualizar.setNomeDaSquad(usuarioNovo.getNomeDaSquad());
+
+        usuarioRepository.save(usuarioParaAtualizar);
+
+        return usuarioParaAtualizar;
+
+    }
+
 }
+
