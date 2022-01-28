@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ImpedimentoDTO {
+public class ImpedimentoSaidaDTO {
 
     private Long id;
     @NotNull
