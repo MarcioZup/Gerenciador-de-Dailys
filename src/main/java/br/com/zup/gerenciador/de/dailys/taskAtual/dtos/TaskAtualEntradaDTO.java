@@ -17,7 +17,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TaskAtualDTO {
+public class TaskAtualEntradaDTO {
     @NotBlank
     @Size(min = 10, max = 200, message = "Favor digitar uma descrição entre 10 a 200 caracteres")
     private String descricao;
@@ -26,7 +26,7 @@ public class TaskAtualDTO {
     @NotNull
     private Date previsaoFim;
     @NotBlank
-    private Usuario usuario;
+    private String emailUsuario;
 
 
 }
