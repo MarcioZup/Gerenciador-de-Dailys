@@ -1,6 +1,7 @@
 package br.com.zup.gerenciador.de.dailys.taskAtual;
 
-import br.com.zup.gerenciador.de.dailys.taskAtual.dtos.TaskAtualDTO;
+import br.com.zup.gerenciador.de.dailys.taskAtual.dtos.TaskAtualEntradaDTO;
+import br.com.zup.gerenciador.de.dailys.taskAtual.dtos.TaskAtualSaidaDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,16 +22,18 @@ public class TaskAtualController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public TaskAtualDTO cadastrarTaskAtual(@RequestBody @Valid TaskAtualDTO taskAtual){
-        TaskAtual taskAtualParaCadastro = modelMapper.map(taskAtual, TaskAtual.class);
-        return modelMapper.map(taskAtualService.salvarTaskAtual(taskAtualParaCadastro),TaskAtualDTO.class);
+    public TaskAtualSaidaDTO cadastrarTaskAtual(@RequestBody @Valid TaskAtualEntradaDTO taskAtualEntradaDTO){
+        TaskAtual taskAtual = taskAtualService.salvarTaskAtual(taskAtualEntradaDTO.getEmailUsuario());
+        taskAtual.setDescricao(taskAtualEntradaDTO.getDescricao());
+
+        return modelMapper.map(taskAtual, TaskAtualSaidaDTO.class);
     }
 
     @GetMapping
-    public List<TaskAtualDTO>exibirTaskAtuais(){
-        List<TaskAtualDTO>listaDeTasksAtuais = new ArrayList<>();
+    public List<TaskAtualEntradaDTO>exibirTaskAtuais(){
+        List<TaskAtualEntradaDTO>listaDeTasksAtuais = new ArrayList<>();
         for(TaskAtual taskAtualReferencia : taskAtualService.exibirTasksAtuais()){
-            TaskAtualDTO atualDTO = modelMapper.map(taskAtualReferencia, TaskAtualDTO.class);
+            TaskAtualEntradaDTO atualDTO = modelMapper.map(taskAtualReferencia, TaskAtualEntradaDTO.class);
             listaDeTasksAtuais.add(atualDTO);
         }
         return listaDeTasksAtuais;
@@ -43,9 +46,9 @@ public class TaskAtualController {
     }
 
     @PutMapping("/{id}")
-    public TaskAtualDTO atualizarTask(@PathVariable Long id, @RequestBody TaskAtualDTO taskAtualDTO){
+    public TaskAtualEntradaDTO atualizarTask(@PathVariable Long id, @RequestBody TaskAtualEntradaDTO taskAtualDTO){
         TaskAtual taskAtual = taskAtualService.atualizarTaskAtual(id, taskAtualDTO);
 
-        return modelMapper.map(taskAtual, TaskAtualDTO.class);
+        return modelMapper.map(taskAtual, TaskAtualEntradaDTO.class);
     }
 }
