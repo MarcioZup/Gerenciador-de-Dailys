@@ -25,6 +25,7 @@ public class TaskAtualController {
     public TaskAtualSaidaDTO cadastrarTaskAtual(@RequestBody @Valid TaskAtualEntradaDTO taskAtualEntradaDTO){
         TaskAtual taskAtual = taskAtualService.salvarTaskAtual(taskAtualEntradaDTO.getEmailUsuario());
         taskAtual.setDescricao(taskAtualEntradaDTO.getDescricao());
+        taskAtual.setPrevisaoFim(taskAtualEntradaDTO.getPrevisaoFim());
 
         return modelMapper.map(taskAtual, TaskAtualSaidaDTO.class);
     }

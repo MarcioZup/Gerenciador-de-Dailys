@@ -1,13 +1,15 @@
 package br.com.zup.gerenciador.de.dailys.taskAtual;
 
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 
@@ -21,8 +23,9 @@ public class TaskAtual {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descricao;
-    private Date dataInicio;
-    private Date previsaoFim;
+    @JsonFormat(pattern = "dd-MM-yyy")
+    private LocalDate dataInicio = LocalDate.now();
+    private String previsaoFim;
 
     @ManyToOne(optional = false)
     private Usuario usuario;
