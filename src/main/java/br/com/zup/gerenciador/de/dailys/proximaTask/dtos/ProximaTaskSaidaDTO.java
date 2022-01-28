@@ -1,6 +1,7 @@
 package br.com.zup.gerenciador.de.dailys.proximaTask.dtos;
 
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
+import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsarioSaidaTasksDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,8 +18,9 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProximaTaskDTO {
+public class ProximaTaskSaidaDTO {
 
+    private Long id;
     @NotBlank
     @Size(min = 10, max = 200, message = "Favor digitar uma descrição entre 10 a 200 caracteres")
     private String descricao;
@@ -27,6 +29,6 @@ public class ProximaTaskDTO {
     @NotNull
     private Date previsaoFim;
     @Valid
-    private Usuario usuario;
+    private UsarioSaidaTasksDTO usuario;
 
 }
