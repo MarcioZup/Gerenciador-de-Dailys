@@ -1,10 +1,8 @@
 package br.com.zup.gerenciador.de.dailys.impedimento;
 
-import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoDTO;
+import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoSaidaDTO;
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
-import br.com.zup.gerenciador.de.dailys.usuario.UsuarioInexistente;
 import br.com.zup.gerenciador.de.dailys.usuario.UsuarioService;
-import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +12,14 @@ import java.util.Optional;
 public class ImpedimentoService {
     @Autowired
     private ImpedimentoRepository impedimentoRepository;
+    @Autowired
+    private UsuarioService usuarioService;
 
-    public Impedimento salvarImpedimento(Impedimento impedimento){
+    public Impedimento salvarImpedimento(String idUsuario){
+        Usuario usuario = usuarioService.exibirUsuarioPorEmail(idUsuario);
+        Impedimento impedimento = new Impedimento();
+        impedimento.setUsuario(usuario);
+
         return impedimentoRepository.save(impedimento);
     }
 
@@ -32,9 +36,9 @@ public class ImpedimentoService {
         impedimentoRepository.deleteById(id);
     }
 
-    public Impedimento alterarDescricaoImpedimento(Long id, ImpedimentoDTO impedimentoNovo) {
+    public Impedimento alterarDescricaoImpedimento(Long id, ImpedimentoSaidaDTO impedimentoNovo) {
 
-        Optional<Impedimento> impedimento = impedimentoRepository.findByiD(id);
+        Optional<Impedimento> impedimento = impedimentoRepository.findById(id);
         if (impedimento.isEmpty()){
             throw new ImpedimentoInexistente("Não existe impedimento vinculado a este ID");
         }

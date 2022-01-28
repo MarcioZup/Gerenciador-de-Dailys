@@ -1,6 +1,7 @@
 package br.com.zup.gerenciador.de.dailys.impedimento;
 
-import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoDTO;
+import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoSaidaDTO;
+import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoEntradaDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,26 +23,27 @@ public class ImpedimentoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ImpedimentoDTO cadastrarImpedimento(@RequestBody @Valid ImpedimentoDTO impedimento){
-        Impedimento impedimentoACadastrar = modelMapper.map(impedimento, Impedimento.class);
-        return modelMapper.map(impedimentoService.salvarImpedimento(impedimentoACadastrar),ImpedimentoDTO.class);
+    public ImpedimentoSaidaDTO cadastrarImpedimento(@RequestBody @Valid ImpedimentoEntradaDTO impedimentoEntradaDTO){
+        Impedimento impedimento = impedimentoService.salvarImpedimento(impedimentoEntradaDTO.getEmailUsuario());
+        impedimento.setDescricao(impedimentoEntradaDTO.getDescricao());
+        return modelMapper.map(impedimento, ImpedimentoSaidaDTO.class);
     }
 
     @GetMapping
-    public List<ImpedimentoDTO> exibirImpedimentos(){
-        List<ImpedimentoDTO> listaDeImpedimentos = new ArrayList<>();
+    public List<ImpedimentoSaidaDTO> exibirImpedimentos(){
+        List<ImpedimentoSaidaDTO> listaDeImpedimentos = new ArrayList<>();
         for(Impedimento impedimentoReferencia: impedimentoService.exibirImpedimentos()){
-            ImpedimentoDTO impedimentoDTO = modelMapper.map(impedimentoReferencia, ImpedimentoDTO.class);
+            ImpedimentoSaidaDTO impedimentoDTO = modelMapper.map(impedimentoReferencia, ImpedimentoSaidaDTO.class);
             listaDeImpedimentos.add(impedimentoDTO);
         }
         return listaDeImpedimentos;
     }
 
     @PutMapping("/{id}")
-    public ImpedimentoDTO atualizarImpedimento(@PathVariable Long id, @RequestBody ImpedimentoDTO impedimentoDTO){
+    public ImpedimentoSaidaDTO atualizarImpedimento(@PathVariable Long id, @RequestBody ImpedimentoSaidaDTO impedimentoDTO){
             Impedimento impedimento = impedimentoService.alterarDescricaoImpedimento(id, impedimentoDTO);
 
-            return modelMapper.map(impedimento, ImpedimentoDTO.class);
+            return modelMapper.map(impedimento, ImpedimentoSaidaDTO.class);
     }
 
     @DeleteMapping("/{id}")

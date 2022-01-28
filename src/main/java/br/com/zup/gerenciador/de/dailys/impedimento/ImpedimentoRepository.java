@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface ImpedimentoRepository extends CrudRepository<Impedimento, Long> {
-    Optional<Impedimento> findByiD(Long id);
+    Optional<Impedimento> findById(Long id);
 }
