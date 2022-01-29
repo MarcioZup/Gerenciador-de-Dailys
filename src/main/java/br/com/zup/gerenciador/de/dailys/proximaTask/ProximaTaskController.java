@@ -26,6 +26,7 @@ public class ProximaTaskController {
     public ProximaTaskSaidaDTO salvarTask(@RequestBody @NotNull ProximaTaskEntradaDTO proximaTaskEntradaDTO){
         ProximaTask proximaTask = proximaTaskService.salvarProximaTask(proximaTaskEntradaDTO.getEmailUsuario());
         proximaTask.setDescricao(proximaTaskEntradaDTO.getDescricao());
+        proximaTask.setPrevisaoFim(proximaTaskEntradaDTO.getPrevisaoFim());
 
         return modelMapper.map(proximaTask, ProximaTaskSaidaDTO.class);
 
