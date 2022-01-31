@@ -3,6 +3,7 @@ package br.com.zup.gerenciador.de.dailys.proximaTask;
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
 import br.com.zup.gerenciador.de.dailys.usuario.UsuarioInexistente;
 import br.com.zup.gerenciador.de.dailys.usuario.UsuarioRepository;
+import com.fasterxml.jackson.databind.annotation.JsonTypeResolver;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 @SpringBootTest
 public class ProximaTaskServiceTEST {
@@ -61,6 +64,14 @@ public class ProximaTaskServiceTEST {
         proximaTaskService.salvarProximaTask(usuario.getEmail());
 
         Mockito.verify(proximaTaskRepository, Mockito.times(1)).save(proximaTask);
+    }
+
+    @Test
+    public void testeVisualizarProximasTasksCadastradas(){
+        List<ProximaTask> proximaTasks = Arrays.asList(proximaTask);
+        Mockito.when(proximaTaskRepository.findAll()).thenReturn(proximaTasks);
+        List<ProximaTask> proximaTasksResposta = (List<ProximaTask>) proximaTaskService.exibirProximasTasks();
+        Mockito.verify(proximaTaskRepository, Mockito.times(1)).findAll();
     }
 
 }
