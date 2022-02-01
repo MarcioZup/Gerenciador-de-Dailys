@@ -16,6 +16,9 @@ public class UsuarioService {
     BCryptPasswordEncoder encoder;
 
     public Usuario salvarUsuario(Usuario usuario) {
+        if (usuarioRepository.countByEmail(usuario.getEmail()) == 0) {
+            throw new UsuarioInexistente("Usuário não cadastrado");
+        }
         validarEmail(usuario.getEmail());
 
         String senhaCriptografada = encoder.encode(usuario.getSenha());

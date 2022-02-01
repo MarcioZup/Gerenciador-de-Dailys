@@ -34,4 +34,16 @@ public class Usuario {
     @OneToMany(cascade = CascadeType.MERGE)
     private List<Impedimento> impedimentos;
 
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "email='" + email + '\'' +
+                ", senha='" + senha + '\'' +
+                ", nome='" + nome + '\'' +
+                ", nomeDaSquad='" + nomeDaSquad + '\'' +
+                ", tasksAtuais=" + tasksAtuais +
+                ", proximaTasks=" + proximaTasks +
+                ", impedimentos=" + impedimentos +
+                '}';
+    }
 }
