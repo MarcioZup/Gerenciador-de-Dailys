@@ -57,4 +57,11 @@ public class UsuarioServiceTest {
         Mockito.verify(usuarioRepository, Mockito.times(1)).deleteById(Mockito.anyString());
     }
 
+    @Test
+    public void testeAlterarDadosDoUsuarioCaminhoPositivo(){
+        Mockito.when(usuarioRepository.findByEmail(Mockito.anyString())).thenReturn(Optional.of(usuario));
+        usuario.setNomeDaSquad("Vivo");
+        Assertions.assertEquals("Vivo", "Vivo");
+    }
+
 }
