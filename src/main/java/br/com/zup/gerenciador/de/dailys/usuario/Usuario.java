@@ -34,4 +34,5 @@ public class Usuario {
     @OneToMany(cascade = CascadeType.MERGE)
     private List<Impedimento> impedimentos;
 
+
 }
