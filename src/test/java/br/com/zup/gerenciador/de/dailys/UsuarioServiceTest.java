@@ -64,4 +64,11 @@ public class UsuarioServiceTest {
         Assertions.assertEquals("Vivo", "Vivo");
     }
 
+    @Test
+    public void testeAlterarDadosDoUsuarioCaminhoNegativo(){
+        Mockito.when(usuarioRepository.findByEmail(Mockito.anyString())).thenReturn(Optional.of(usuario));
+        usuario.setNomeDaSquad("Vivo");
+        Assertions.assertFalse(usuario.getNomeDaSquad().equals("Itaucard"));
+    }
+
 }
