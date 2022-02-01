@@ -71,4 +71,9 @@ public class UsuarioServiceTest {
         Assertions.assertFalse(usuario.getNomeDaSquad().equals("Itaucard"));
     }
 
+    @Test
+    public void testeValidarEmail(){
+        Assertions.assertTrue(usuario.getEmail().contains("@zup.com.br"));
+    }
+
 }
