@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.Optional;
+
 @SpringBootTest
 public class UsuarioServiceTest {
     @MockBean
@@ -47,8 +49,12 @@ public class UsuarioServiceTest {
     }
 
     @Test
-    public void testarDeletarUsuario(){
+    public void testeDeletarUsuario(){
+        Mockito.when(usuarioRepository.findByEmail(Mockito.anyString())).thenReturn(Optional.of(usuario));
+        Mockito.doNothing().when(usuarioRepository).deleteById(Mockito.anyString());
+        usuarioRepository.deleteById(usuario.getEmail());
 
+        Mockito.verify(usuarioRepository, Mockito.times(1)).deleteById(Mockito.anyString());
     }
 
 }
