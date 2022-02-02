@@ -76,4 +76,6 @@ public class UsuarioServiceTest {
         Assertions.assertTrue(usuario.getEmail().contains("@zup.com.br"));
     }
 
+
+
 }

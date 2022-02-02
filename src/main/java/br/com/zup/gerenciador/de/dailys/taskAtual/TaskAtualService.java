@@ -1,6 +1,6 @@
 package br.com.zup.gerenciador.de.dailys.taskAtual;
 
-import br.com.zup.gerenciador.de.dailys.taskAtual.dtos.TaskAtualEntradaDTO;
+import br.com.zup.gerenciador.de.dailys.taskAtual.dtos.TaskAtualSaidaDTO;
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
 import br.com.zup.gerenciador.de.dailys.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class TaskAtualService {
         return taskAtualRepository.findAll();
     }
 
-    public TaskAtual atualizarTaskAtual( Long id, TaskAtualEntradaDTO taskAtualDTO){
+    public TaskAtual atualizarTaskAtual(Long id, TaskAtualSaidaDTO taskAtualDTO){
         Optional<TaskAtual> taskAtualOptional = taskAtualRepository.findById(id);
         if (taskAtualOptional.isEmpty()){
             throw  new TaskAtualInexistente("Não existe task atual vinculado a esse ID");
