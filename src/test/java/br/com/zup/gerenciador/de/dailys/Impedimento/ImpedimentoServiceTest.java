@@ -1,10 +1,12 @@
-package br.com.zup.gerenciador.de.dailys;
+package br.com.zup.gerenciador.de.dailys.Impedimento;
 
 import br.com.zup.gerenciador.de.dailys.impedimento.Impedimento;
+import br.com.zup.gerenciador.de.dailys.impedimento.ImpedimentoInexistente;
 import br.com.zup.gerenciador.de.dailys.impedimento.ImpedimentoRepository;
 import br.com.zup.gerenciador.de.dailys.impedimento.ImpedimentoService;
 import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoSaidaDTO;
 import br.com.zup.gerenciador.de.dailys.proximaTask.dtos.ProximaTaskSaidaDTO;
+import br.com.zup.gerenciador.de.dailys.proximaTask.exception.ProximaTaskInexistente;
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
 import br.com.zup.gerenciador.de.dailys.usuario.UsuarioInexistente;
 import br.com.zup.gerenciador.de.dailys.usuario.UsuarioRepository;
@@ -66,6 +68,16 @@ import static org.mockito.Mockito.mock;
         }
 
         @Test
+        public void testeDeletarImpedimentoNegativo(){
+            Mockito.doNothing().when(impedimentoRepository).deleteById(Mockito.anyLong());
+
+            ImpedimentoInexistente exception = Assertions.assertThrows(ImpedimentoInexistente.class,
+                    () -> {impedimentoService.deletarImpedimento(Long.valueOf(0));});
+
+            Assertions.assertEquals("Impedimento não encontrado", exception.getMessage());
+        }
+
+        @Test
         public void testeSalvarImpedimentoNegativo() {
             Mockito.when(usuarioRepository.existsById(Mockito.anyString())).thenReturn(false);
 
@@ -83,13 +95,26 @@ import static org.mockito.Mockito.mock;
 
 
         @Test
-        public void testeAtualizarProximoImpedimento(){
+        public void testeAtualizarImpedimentoPositivo(){
 
             Mockito.when(impedimentoRepository.save(impedimento)).thenReturn(impedimento);
             Mockito.when(impedimentoRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(impedimento));
             final ImpedimentoSaidaDTO impedimentoSaidaDTOMock = mock(ImpedimentoSaidaDTO.class);
             impedimentoService.alterarDescricaoImpedimento(Mockito.anyLong(), impedimentoSaidaDTOMock);
             Mockito.verify(impedimentoRepository, Mockito.times(1)).save(impedimento);
+        }
+
+        @Test
+        public void testeAtualizarImpedimentoNegativo(){
+            Mockito.when(impedimentoRepository.save(Mockito.any())).thenReturn(impedimento);
+            Mockito.when(impedimentoRepository.findById(Mockito.anyLong())).thenReturn(Optional.empty());
+
+            final ImpedimentoSaidaDTO proximaTaskSaidaDTOMOCK = mock(ImpedimentoSaidaDTO.class);
+
+            ImpedimentoInexistente exception = Assertions.assertThrows(ImpedimentoInexistente.class,
+                    () -> {impedimentoService.alterarDescricaoImpedimento(Long.valueOf(0), proximaTaskSaidaDTOMOCK);});
+
+            Assertions.assertEquals("Não existe impedimento vinculado a este ID", exception.getMessage());
         }
 
         @Test
