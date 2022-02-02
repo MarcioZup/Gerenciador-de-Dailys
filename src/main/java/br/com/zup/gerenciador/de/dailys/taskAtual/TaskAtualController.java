@@ -47,7 +47,7 @@ public class TaskAtualController {
     }
 
     @PutMapping("/{id}")
-    public TaskAtualEntradaDTO atualizarTask(@PathVariable Long id, @RequestBody TaskAtualEntradaDTO taskAtualDTO){
+    public TaskAtualEntradaDTO atualizarTask(@PathVariable Long id, @RequestBody TaskAtualSaidaDTO taskAtualDTO){
         TaskAtual taskAtual = taskAtualService.atualizarTaskAtual(id, taskAtualDTO);
 
         return modelMapper.map(taskAtual, TaskAtualEntradaDTO.class);
