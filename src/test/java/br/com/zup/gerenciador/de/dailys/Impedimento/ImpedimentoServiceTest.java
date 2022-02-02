@@ -1,4 +1,4 @@
-package br.com.zup.gerenciador.de.dailys;
+package br.com.zup.gerenciador.de.dailys.Impedimento;
 
 import br.com.zup.gerenciador.de.dailys.impedimento.Impedimento;
 import br.com.zup.gerenciador.de.dailys.impedimento.ImpedimentoInexistente;
@@ -65,6 +65,16 @@ import static org.mockito.Mockito.mock;
 
 
             Mockito.verify(impedimentoRepository, Mockito.times(1)).deleteById(Mockito.anyLong());
+        }
+
+        @Test
+        public void testeDeletarImpedimentoNegativo(){
+            Mockito.doNothing().when(impedimentoRepository).deleteById(Mockito.anyLong());
+
+            ImpedimentoInexistente exception = Assertions.assertThrows(ImpedimentoInexistente.class,
+                    () -> {impedimentoService.deletarImpedimento(Long.valueOf(0));});
+
+            Assertions.assertEquals("Impedimento não encontrado", exception.getMessage());
         }
 
         @Test
