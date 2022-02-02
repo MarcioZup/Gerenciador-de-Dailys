@@ -5,7 +5,6 @@ import br.com.zup.gerenciador.de.dailys.proximaTask.exception.ProximaTaskInexist
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
 import br.com.zup.gerenciador.de.dailys.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -46,6 +45,10 @@ public class ProximaTaskService {
     }
 
     public void deletarProximaTask(Long id) {
+        Optional<ProximaTask> proximaTaskOptional = proximaTaskRepository.findById(id);
+        if (proximaTaskOptional.isEmpty()){
+            throw new ProximaTaskInexistente("Não existe próxima task vinculado a este ID");
+        }
 
         proximaTaskRepository.deleteById(id);
 
