@@ -1,6 +1,7 @@
 package br.com.zup.gerenciador.de.dailys.usuario;
 
 import br.com.zup.gerenciador.de.dailys.config.componentes.Conversor;
+import br.com.zup.gerenciador.de.dailys.config.seguranca.UsuarioLogado;
 import br.com.zup.gerenciador.de.dailys.config.seguranca.UsuarioLoginService;
 import br.com.zup.gerenciador.de.dailys.config.seguranca.jwt.JwtComponent;
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -27,10 +29,12 @@ import java.util.List;
 public class UsuarioControllerTest {
     @MockBean
     private UsuarioService usuarioService;
-    @MockBean
+    @Mock
     private UsuarioLoginService usuarioLoginService;
     @MockBean
     private JwtComponent jwtComponent;
+    @Mock
+    UsuarioLogado usuarioLogado;
 
     @Autowired
     private MockMvc mockMvc;
