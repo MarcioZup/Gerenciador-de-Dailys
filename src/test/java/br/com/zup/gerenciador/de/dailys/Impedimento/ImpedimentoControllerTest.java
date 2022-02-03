@@ -4,6 +4,7 @@ import br.com.zup.gerenciador.de.dailys.config.componentes.Conversor;
 import br.com.zup.gerenciador.de.dailys.config.seguranca.UsuarioLoginService;
 import br.com.zup.gerenciador.de.dailys.config.seguranca.jwt.JwtComponent;
 import br.com.zup.gerenciador.de.dailys.impedimento.Impedimento;
+import br.com.zup.gerenciador.de.dailys.impedimento.ImpedimentoController;
 import br.com.zup.gerenciador.de.dailys.impedimento.ImpedimentoInexistente;
 import br.com.zup.gerenciador.de.dailys.impedimento.ImpedimentoService;
 import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoEntradaDTO;
@@ -32,7 +33,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
 
-@WebMvcTest({ImpedimentoControllerTest.class, Conversor.class, UsuarioLoginService.class, JwtComponent.class})
+@WebMvcTest({ImpedimentoController.class, Conversor.class, UsuarioLoginService.class, JwtComponent.class})
 public class ImpedimentoControllerTest {
     @MockBean
     ImpedimentoInexistente impedimentoInexistente;
@@ -85,7 +86,19 @@ public class ImpedimentoControllerTest {
 
         ResultActions resposta = mockMvc.perform(MockMvcRequestBuilders.delete("/impedimento/" + impedimento.getId())
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().is(404));
+                .andExpect(MockMvcResultMatchers.status().is(422));
+    }
+
+    @Test
+    @WithMockUser("karen.almeida@zup.com.br")
+    public void testarDeletarImpedimento() throws Exception {
+        impedimento.setId(Long.valueOf(1));
+        Mockito.doNothing().when(impedimentoService).deletarImpedimento(Mockito.anyLong());
+        ResultActions resultado = mockMvc.perform(MockMvcRequestBuilders.delete("/impedimento/" + impedimento.getId())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(204));
+
+        Mockito.verify(impedimentoService, Mockito.times(1)).deletarImpedimento(Mockito.anyLong());
     }
 
 }
