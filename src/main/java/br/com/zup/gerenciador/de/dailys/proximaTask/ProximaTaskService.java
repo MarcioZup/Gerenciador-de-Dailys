@@ -1,5 +1,5 @@
 package br.com.zup.gerenciador.de.dailys.proximaTask;
-
+import br.com.zup.gerenciador.de.dailys.proximaTask.dtos.ProximaTaskEntradaDTO;
 import br.com.zup.gerenciador.de.dailys.proximaTask.dtos.ProximaTaskSaidaDTO;
 import br.com.zup.gerenciador.de.dailys.proximaTask.exception.ProximaTaskInexistente;
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
@@ -16,10 +16,12 @@ public class ProximaTaskService {
     @Autowired
     private UsuarioService usuarioService;
 
-    public ProximaTask salvarProximaTask(String emailUsuario) {
-        Usuario usuario = usuarioService.exibirUsuarioPorEmail(emailUsuario);
+    public ProximaTask salvarProximaTask(ProximaTaskEntradaDTO proximaTaskEntradaDTO) {
+        Usuario usuario = usuarioService.exibirUsuarioPorEmail(proximaTaskEntradaDTO.getEmailUsuario());
         ProximaTask proximaTask = new ProximaTask();
         proximaTask.setUsuario(usuario);
+        proximaTask.setPrevisaoFim(proximaTaskEntradaDTO.getPrevisaoFim());
+        proximaTask.setDescricao(proximaTaskEntradaDTO.getDescricao());
 
         return proximaTaskRepository.save(proximaTask);
 
