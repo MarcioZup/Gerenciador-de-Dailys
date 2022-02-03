@@ -1,6 +1,9 @@
 package br.com.zup.gerenciador.de.dailys.impedimento;
 
+import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoEntradaDTO;
 import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoSaidaDTO;
+import br.com.zup.gerenciador.de.dailys.proximaTask.ProximaTask;
+import br.com.zup.gerenciador.de.dailys.proximaTask.dtos.ProximaTaskEntradaDTO;
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
 import br.com.zup.gerenciador.de.dailys.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +18,14 @@ public class ImpedimentoService {
     @Autowired
     private UsuarioService usuarioService;
 
-    public Impedimento salvarImpedimento(String idUsuario){
-        Usuario usuario = usuarioService.exibirUsuarioPorEmail(idUsuario);
-        Impedimento impedimento = new Impedimento();
+    public Impedimento salvarImpedimento(ImpedimentoEntradaDTO impedimentoEntradaDTO) {
+        Usuario usuario = usuarioService.exibirUsuarioPorEmail(impedimentoEntradaDTO.getEmailUsuario());
+       Impedimento impedimento = new Impedimento();
         impedimento.setUsuario(usuario);
+        impedimento.setDescricao(impedimentoEntradaDTO.getDescricao());
 
         return impedimentoRepository.save(impedimento);
+
     }
 
     public Iterable<Impedimento>exibirImpedimentos(){
@@ -50,5 +55,6 @@ public class ImpedimentoService {
         return impedimentoParaAtualizar;
 
     }
+
 
 }
