@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +23,7 @@ public class ProximaTaskController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ProximaTaskSaidaDTO salvarTask(@RequestBody @NotNull ProximaTaskEntradaDTO proximaTaskEntradaDTO){
-        ProximaTask proximaTask = proximaTaskService.salvarProximaTask(proximaTaskEntradaDTO.getEmailUsuario());
-        proximaTask.setDescricao(proximaTaskEntradaDTO.getDescricao());
-        proximaTask.setPrevisaoFim(proximaTaskEntradaDTO.getPrevisaoFim());
+        ProximaTask proximaTask = proximaTaskService.salvarProximaTask(proximaTaskEntradaDTO);
 
         return modelMapper.map(proximaTask, ProximaTaskSaidaDTO.class);
 
@@ -50,6 +47,7 @@ public class ProximaTaskController {
         ProximaTask proximaTask = proximaTaskService.atualizarProximaTask(id, proximaTaskDTO);
 
         return modelMapper.map(proximaTask, ProximaTaskSaidaDTO.class);
+
     }
 
     @DeleteMapping("/{id}")
