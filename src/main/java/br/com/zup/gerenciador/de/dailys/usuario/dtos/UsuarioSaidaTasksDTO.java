@@ -7,7 +7,7 @@ import lombok.Setter;
 @RequiredArgsConstructor
 @Getter
 @Setter
-public class UsarioSaidaTasksDTO {
+public class UsuarioSaidaTasksDTO {
     private String nome;
     private String email;
 }

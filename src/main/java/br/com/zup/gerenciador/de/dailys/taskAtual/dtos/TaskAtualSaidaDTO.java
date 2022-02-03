@@ -1,6 +1,6 @@
 package br.com.zup.gerenciador.de.dailys.taskAtual.dtos;
 
-import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsarioSaidaTasksDTO;
+import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsuarioSaidaTasksDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +26,6 @@ public class TaskAtualSaidaDTO {
     @DateTimeFormat
     private String previsaoFim;
     @NotBlank
-    private UsarioSaidaTasksDTO usuario;
+    private UsuarioSaidaTasksDTO usuario;
 
 }

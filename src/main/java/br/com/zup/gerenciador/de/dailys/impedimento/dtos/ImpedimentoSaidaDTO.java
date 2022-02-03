@@ -1,6 +1,6 @@
 package br.com.zup.gerenciador.de.dailys.impedimento.dtos;
 
-import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsarioSaidaTasksDTO;
+import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsuarioSaidaTasksDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +23,6 @@ public class ImpedimentoSaidaDTO {
     @Size(min = 10, max = 200, message = "Favor digitar uma descrição entre 10 a 200 caracteres")
     private String descricao;
     @NotNull
-    private UsarioSaidaTasksDTO usuario;
+    private UsuarioSaidaTasksDTO usuario;
 
 }

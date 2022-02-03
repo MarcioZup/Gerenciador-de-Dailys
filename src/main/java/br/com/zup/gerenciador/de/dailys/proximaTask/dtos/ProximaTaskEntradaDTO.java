@@ -22,6 +22,7 @@ public class ProximaTaskEntradaDTO {
     @JsonFormat(pattern = "dd-MM-yyy")
     private LocalDate dataInicio = LocalDate.now();
     @NotNull
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private String previsaoFim;
     @NotNull
     private String emailUsuario;
