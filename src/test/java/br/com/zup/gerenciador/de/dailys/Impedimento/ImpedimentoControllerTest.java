@@ -26,6 +26,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 
+
 @WebMvcTest({ImpedimentoController.class, Conversor.class, UsuarioLoginService.class, JwtComponent.class})
 public class ImpedimentoControllerTest {
     @MockBean
@@ -40,6 +41,7 @@ public class ImpedimentoControllerTest {
     @Autowired
     private MockMvc mockMvc;
     private ObjectMapper objectMapper;
+    private ImpedimentoSaidaDTO impedimentoDTO;
 
 
 
@@ -48,6 +50,7 @@ public class ImpedimentoControllerTest {
     private Impedimento impedimento;
     @Mock
     private Usuario usuario;
+
 
     @BeforeEach
     public void setup() {
@@ -90,6 +93,20 @@ public class ImpedimentoControllerTest {
 
         Mockito.verify(impedimentoService, Mockito.times(1)).deletarImpedimento(Mockito.anyLong());
     }
+
+    @Test
+    @WithMockUser("karen.almeida@zup.com.br")
+    public void testarAlterarDescricaoImpedimento() throws Exception {
+        Mockito.doThrow(ImpedimentoInexistente.class).when(impedimentoService)
+                .alterarDescricaoImpedimento(Mockito.anyLong(), Mockito.any(ImpedimentoSaidaDTO.class));
+        String json = objectMapper.writeValueAsString(impedimentoDTO);
+
+        ResultActions resultado = mockMvc.perform(MockMvcRequestBuilders.put("/comentarios/1")
+                        .content(json).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(404));
+
+    }
+
 
 
 
