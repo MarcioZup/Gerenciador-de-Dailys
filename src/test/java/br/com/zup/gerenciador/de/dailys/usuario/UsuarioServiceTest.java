@@ -1,4 +1,4 @@
-package br.com.zup.gerenciador.de.dailys;
+package br.com.zup.gerenciador.de.dailys.usuario;
 
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
 import br.com.zup.gerenciador.de.dailys.usuario.UsuarioInexistente;
