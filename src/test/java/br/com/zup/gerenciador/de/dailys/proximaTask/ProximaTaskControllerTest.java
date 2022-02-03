@@ -53,7 +53,7 @@ public class  ProximaTaskControllerTest {
     private Usuario usuario;
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         usuario = new Usuario();
         usuario.setEmail("let.let@zup.com.br");
         usuario.setSenha("Xablau123");
@@ -90,8 +90,7 @@ public class  ProximaTaskControllerTest {
         Mockito.doThrow(ProximaTaskInexistente.class).when(proximaTaskService).deletarProximaTask(Mockito.anyLong());
 
         ResultActions resposta = mockMvc.perform(MockMvcRequestBuilders.delete("/proximaTask" +
-                proximaTask.getId()).contentType(MediaType.APPLICATION_JSON))
+                        proximaTask.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(404));
     }
-
 }
