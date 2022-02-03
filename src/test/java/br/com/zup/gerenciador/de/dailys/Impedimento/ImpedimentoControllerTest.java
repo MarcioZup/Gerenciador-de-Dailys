@@ -9,12 +9,6 @@ import br.com.zup.gerenciador.de.dailys.impedimento.ImpedimentoInexistente;
 import br.com.zup.gerenciador.de.dailys.impedimento.ImpedimentoService;
 import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoEntradaDTO;
 import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoSaidaDTO;
-import br.com.zup.gerenciador.de.dailys.proximaTask.ProximaTask;
-import br.com.zup.gerenciador.de.dailys.proximaTask.ProximaTaskController;
-import br.com.zup.gerenciador.de.dailys.proximaTask.ProximaTaskService;
-import br.com.zup.gerenciador.de.dailys.proximaTask.dtos.ProximaTaskEntradaDTO;
-import br.com.zup.gerenciador.de.dailys.proximaTask.dtos.ProximaTaskSaidaDTO;
-import br.com.zup.gerenciador.de.dailys.proximaTask.exception.ProximaTaskInexistente;
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +25,6 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.time.LocalDate;
 
 @WebMvcTest({ImpedimentoController.class, Conversor.class, UsuarioLoginService.class, JwtComponent.class})
 public class ImpedimentoControllerTest {
@@ -48,10 +41,7 @@ public class ImpedimentoControllerTest {
     private MockMvc mockMvc;
     private ObjectMapper objectMapper;
 
-    @Mock
-    private ImpedimentoSaidaDTO impedimentoSaidaDTO;
-    @Mock
-    private ImpedimentoEntradaDTO impedimentoEntradaDTO;
+
 
 
     @Mock
@@ -100,5 +90,7 @@ public class ImpedimentoControllerTest {
 
         Mockito.verify(impedimentoService, Mockito.times(1)).deletarImpedimento(Mockito.anyLong());
     }
+
+
 
 }
