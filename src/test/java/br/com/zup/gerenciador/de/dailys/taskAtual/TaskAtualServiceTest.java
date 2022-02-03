@@ -1,4 +1,4 @@
-package br.com.zup.gerenciador.de.dailys;
+package br.com.zup.gerenciador.de.dailys.taskAtual;
 
 import br.com.zup.gerenciador.de.dailys.taskAtual.TaskAtual;
 import br.com.zup.gerenciador.de.dailys.taskAtual.TaskAtualRepository;
