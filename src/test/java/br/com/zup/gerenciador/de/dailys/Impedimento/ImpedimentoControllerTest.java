@@ -96,7 +96,7 @@ public class ImpedimentoControllerTest {
 
     @Test
     @WithMockUser("karen.almeida@zup.com.br")
-    public void testarAlterarDescricaoImpedimento() throws Exception {
+    public void testarAlterarDescricaoImpedimentoNaoEncontrado() throws Exception {
         Mockito.doThrow(ImpedimentoInexistente.class).when(impedimentoService)
                 .alterarDescricaoImpedimento(Mockito.anyLong(), Mockito.any(ImpedimentoSaidaDTO.class));
         String json = objectMapper.writeValueAsString(impedimentoDTO);
