@@ -87,4 +87,16 @@ public class TaskAtualControllerTest {
                         taskAtual.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(404));
     }
+
+    @Test
+    @WithMockUser("marcio.viana@zup.com.br")
+    public void testarDeletarTaskAtual() throws Exception {
+        taskAtual.setId(Long.valueOf(1));
+        Mockito.doNothing().when(taskAtualService).deletartaskAtual(Mockito.anyLong());
+        ResultActions resultado = mockMvc.perform(MockMvcRequestBuilders.delete("/taskAtual/" + taskAtual.getId())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(204));
+
+        Mockito.verify(taskAtualService, Mockito.times(1)).deletartaskAtual(Mockito.anyLong());
+    }
 }
