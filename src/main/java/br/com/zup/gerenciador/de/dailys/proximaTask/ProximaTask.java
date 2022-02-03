@@ -25,6 +25,7 @@ public class ProximaTask {
     private String descricao;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate dataInicio = LocalDate.now();
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private String previsaoFim;
 
     @ManyToOne(optional = false)

@@ -1,5 +1,6 @@
 package br.com.zup.gerenciador.de.dailys.proximaTask;
 
+import br.com.zup.gerenciador.de.dailys.proximaTask.dtos.ProximaTaskEntradaDTO;
 import br.com.zup.gerenciador.de.dailys.proximaTask.dtos.ProximaTaskSaidaDTO;
 import br.com.zup.gerenciador.de.dailys.proximaTask.exception.ProximaTaskInexistente;
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
@@ -8,6 +9,7 @@ import br.com.zup.gerenciador.de.dailys.usuario.UsuarioRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,10 +22,13 @@ import static org.mockito.Mockito.mock;
 
 @SpringBootTest
 public class ProximaTaskServiceTEST {
+
     @MockBean
     private ProximaTaskRepository proximaTaskRepository;
     @MockBean
     private UsuarioRepository usuarioRepository;
+    @Mock
+    private ProximaTaskEntradaDTO proximaTaskEntradaDTO;
 
     @Autowired
     private ProximaTaskService proximaTaskService;
@@ -33,6 +38,7 @@ public class ProximaTaskServiceTEST {
     private Usuario usuario;
 
     private ProximaTaskSaidaDTO proximaTaskSaidaDTO;
+
 
     @BeforeEach
     private void setup(){
@@ -58,7 +64,7 @@ public class ProximaTaskServiceTEST {
         Mockito.when(usuarioRepository.existsById(Mockito.anyString())).thenReturn(false);
 
         Assertions.assertThrows(UsuarioInexistente.class,
-                () -> {proximaTaskService.salvarProximaTask(usuario.getEmail());});
+                () -> {proximaTaskService.salvarProximaTask(proximaTaskEntradaDTO);});
     }
 
     @Test

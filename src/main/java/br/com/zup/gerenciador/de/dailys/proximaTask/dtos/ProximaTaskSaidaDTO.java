@@ -1,20 +1,17 @@
 package br.com.zup.gerenciador.de.dailys.proximaTask.dtos;
 
-import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
-import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsarioSaidaTasksDTO;
+import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsuarioSaidaTasksDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -30,8 +27,9 @@ public class ProximaTaskSaidaDTO {
     @JsonFormat(pattern = "dd-MM-yyy")
     private LocalDate dataInicio = LocalDate.now();
     @NotNull
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private String previsaoFim;
     @Valid
-    private UsarioSaidaTasksDTO usuario;
+    private UsuarioSaidaTasksDTO usuario;
 
 }
