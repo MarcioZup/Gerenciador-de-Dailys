@@ -101,13 +101,10 @@ public class ImpedimentoControllerTest {
                 .alterarDescricaoImpedimento(Mockito.anyLong(), Mockito.any(ImpedimentoSaidaDTO.class));
         String json = objectMapper.writeValueAsString(impedimentoDTO);
 
-        ResultActions resultado = mockMvc.perform(MockMvcRequestBuilders.put("/comentarios/1")
+        ResultActions resultado = mockMvc.perform(MockMvcRequestBuilders.put("/impedimento/1")
                         .content(json).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().is(404));
+                .andExpect(MockMvcResultMatchers.status().is(422));
 
     }
-
-
-
 
 }

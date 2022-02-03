@@ -4,6 +4,7 @@ import br.com.zup.gerenciador.de.dailys.impedimento.Impedimento;
 import br.com.zup.gerenciador.de.dailys.impedimento.ImpedimentoInexistente;
 import br.com.zup.gerenciador.de.dailys.impedimento.ImpedimentoRepository;
 import br.com.zup.gerenciador.de.dailys.impedimento.ImpedimentoService;
+import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoEntradaDTO;
 import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoSaidaDTO;
 import br.com.zup.gerenciador.de.dailys.proximaTask.dtos.ProximaTaskSaidaDTO;
 import br.com.zup.gerenciador.de.dailys.proximaTask.exception.ProximaTaskInexistente;
@@ -40,6 +41,7 @@ import static org.mockito.Mockito.mock;
         private Usuario usuario;
 
         private ImpedimentoSaidaDTO impedimentoSaidaDTO;
+        private ImpedimentoEntradaDTO impedimentoEntradaDTO;
 
         @BeforeEach
         private void setup(){
@@ -77,12 +79,19 @@ import static org.mockito.Mockito.mock;
             Assertions.assertEquals("Impedimento não encontrado", exception.getMessage());
         }
 
-        @Test
+      /*  @Test
         public void testeSalvarImpedimentoNegativo() {
             Mockito.when(usuarioRepository.existsById(Mockito.anyString())).thenReturn(false);
 
             Assertions.assertThrows(UsuarioInexistente.class,
                     () -> {impedimentoService.salvarImpedimento(usuario.getEmail());});
+        }*/
+        @Test
+        public void testeSalvarProximaTaskNegativo() {
+            Mockito.when(usuarioRepository.existsById(Mockito.anyString())).thenReturn(false);
+
+            Assertions.assertThrows(UsuarioInexistente.class,
+                    () -> {impedimentoService.salvarImpedimento(impedimentoEntradaDTO);});
         }
 
         @Test
@@ -90,7 +99,7 @@ import static org.mockito.Mockito.mock;
             Mockito.when(usuarioRepository.existsById(Mockito.anyString())).thenReturn(true);
 
             Assertions.assertThrows(UsuarioInexistente.class,
-                    () -> {impedimentoService.salvarImpedimento(usuario.getEmail());});
+                    () -> {impedimentoService.salvarImpedimento(impedimentoEntradaDTO);});
         }
 
 

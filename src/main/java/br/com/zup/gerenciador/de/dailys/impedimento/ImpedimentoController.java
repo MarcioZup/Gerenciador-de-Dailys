@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,13 +21,16 @@ public class ImpedimentoController {
     @Autowired
     private ModelMapper modelMapper;
 
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ImpedimentoSaidaDTO cadastrarImpedimento(@RequestBody @Valid ImpedimentoEntradaDTO impedimentoEntradaDTO){
-        Impedimento impedimento = impedimentoService.salvarImpedimento(impedimentoEntradaDTO.getEmailUsuario());
-        impedimento.setDescricao(impedimentoEntradaDTO.getDescricao());
+    public ImpedimentoSaidaDTO salvarImpedimento(@RequestBody @NotNull ImpedimentoEntradaDTO impedimentoEntradaDTO){
+        Impedimento impedimento = impedimentoService.salvarImpedimento(impedimentoEntradaDTO);
+
         return modelMapper.map(impedimento, ImpedimentoSaidaDTO.class);
+
     }
+
 
     @GetMapping
     public List<ImpedimentoSaidaDTO> exibirImpedimentos(){
