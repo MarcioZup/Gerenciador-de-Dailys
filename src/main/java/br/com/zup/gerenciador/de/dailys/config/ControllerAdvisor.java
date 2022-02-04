@@ -4,6 +4,7 @@ import br.com.zup.gerenciador.de.dailys.impedimento.ImpedimentoInexistente;
 import br.com.zup.gerenciador.de.dailys.proximaTask.exception.ProximaTaskInexistente;
 import br.com.zup.gerenciador.de.dailys.taskAtual.TaskAtualInexistente;
 import br.com.zup.gerenciador.de.dailys.usuario.DominioNaoPermitidoException;
+import br.com.zup.gerenciador.de.dailys.usuario.EmailCadastrado;
 import br.com.zup.gerenciador.de.dailys.usuario.UsuarioInexistente;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -35,6 +36,12 @@ public class ControllerAdvisor {
     @ExceptionHandler(UsuarioInexistente.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String retornoIdNaoEncontrado(UsuarioInexistente exception) {
+        return exception.getMessage();
+    }
+
+    @ExceptionHandler(EmailCadastrado.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String retornoIdNaoEncontrado(EmailCadastrado exception) {
         return exception.getMessage();
     }
 

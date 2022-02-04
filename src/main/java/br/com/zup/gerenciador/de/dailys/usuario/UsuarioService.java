@@ -16,15 +16,16 @@ public class UsuarioService {
     BCryptPasswordEncoder encoder;
 
     public Usuario salvarUsuario(Usuario usuario) {
-        if (usuarioRepository.countByEmail(usuario.getEmail()) == 0) {
-            throw new UsuarioInexistente("Usuário não cadastrado");
-        }
         validarEmail(usuario.getEmail());
+        if (usuarioRepository.countByEmail(usuario.getEmail()) > 0) {
+            throw new EmailCadastrado("Email já cadastrado");
+        } else {
+            String senhaCriptografada = encoder.encode(usuario.getSenha());
+            usuario.setSenha(senhaCriptografada);
 
-        String senhaCriptografada = encoder.encode(usuario.getSenha());
-        usuario.setSenha(senhaCriptografada);
+            return usuarioRepository.save(usuario);
 
-        return usuarioRepository.save(usuario);
+        }
 
     }
 
