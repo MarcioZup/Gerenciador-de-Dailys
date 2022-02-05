@@ -97,6 +97,20 @@ public class ImpedimentoControllerTest {
 
     @Test
     @WithMockUser("karen.almeida@zup.com.br")
+    public void testarAlterarDescricaoPositivo() throws Exception {
+        impedimento.setId(Long.valueOf(1));
+        doNothing().when(impedimentoService).alterarDescricaoImpedimento(anyLong(), Mockito.any(ImpedimentoSaidaDTO.class));
+        ResultActions resultado = mockMvc.perform(MockMvcRequestBuilders.put("/impedimento/")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(204));
+
+        verify(impedimentoService, times(1)).alterarDescricaoImpedimento(anyLong(), any(ImpedimentoSaidaDTO.class));
+    }
+
+
+
+    @Test
+    @WithMockUser("karen.almeida@zup.com.br")
     public void testarAlterarDescricaoImpedimentoNegativo() throws Exception {
         doThrow(ImpedimentoInexistente.class).when(impedimentoService)
                 .alterarDescricaoImpedimento(anyLong(), any(ImpedimentoSaidaDTO.class));
@@ -107,19 +121,9 @@ public class ImpedimentoControllerTest {
                 .andExpect(MockMvcResultMatchers.status().is(422));
 
     }
+
     @Test
-    public void testarRotaParaCadastroImpedimentoPositivo() throws Exception {
-        Mockito.when(impedimentoService.salvarImpedimento(Mockito.any(ImpedimentoEntradaDTO.class))).thenReturn(impedimento);
-        String json = objectMapper.writeValueAsString(impedimento);
-
-        ResultActions respostaDaRequisicao = mockMvc.perform(MockMvcRequestBuilders.post("/impedimento")
-                        .content(json).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().is(201));
-
-        String jsonDeRespostaDaAPI = respostaDaRequisicao.andReturn().getResponse().getContentAsString();
-
-    }
-    @Test
+   @WithMockUser("karen.almeida@zup.com.br")
     public void testarRotaParaCadastroImpedimentoNegativo() throws Exception {
         Mockito.when(impedimentoService.salvarImpedimento(Mockito.any(ImpedimentoEntradaDTO.class))).thenReturn(impedimento);
         String json = objectMapper.writeValueAsString(impedimentoDTO);
@@ -129,6 +133,20 @@ public class ImpedimentoControllerTest {
                 .andExpect(MockMvcResultMatchers.status().is(422));
 
         String jsonDeRespostaDaAPI = respostaDaRequisicao.andReturn().getResponse().getContentAsString();
+
+    }
+
+@Test
+    @WithMockUser("karen.almeida@zup.com.br")
+    public void testarRotaParaCadastroImpedimentoPositivo() throws Exception {
+        Mockito.when(impedimentoService.salvarImpedimento(Mockito.any(ImpedimentoEntradaDTO.class))).thenReturn(impedimento);
+        String json = objectMapper.writeValueAsString(impedimento);
+
+        ResultActions respostaDaRequisicao = mockMvc.perform(MockMvcRequestBuilders.post("/impedimento")
+                        .content(json).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(201));
+
+        String jsonDeResposta = respostaDaRequisicao.andReturn().getResponse().getContentAsString();
 
     }
 }
