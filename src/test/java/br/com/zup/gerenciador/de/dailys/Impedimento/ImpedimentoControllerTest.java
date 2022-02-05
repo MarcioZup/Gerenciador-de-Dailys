@@ -119,6 +119,18 @@ public class ImpedimentoControllerTest {
         String jsonDeRespostaDaAPI = respostaDaRequisicao.andReturn().getResponse().getContentAsString();
 
     }
+    @Test
+    public void testarRotaParaCadastroImpedimentoNegativo() throws Exception {
+        Mockito.when(impedimentoService.salvarImpedimento(Mockito.any(ImpedimentoEntradaDTO.class))).thenReturn(impedimento);
+        String json = objectMapper.writeValueAsString(impedimentoDTO);
+
+        ResultActions respostaDaRequisicao = mockMvc.perform(MockMvcRequestBuilders.post("/impedimento")
+                        .content(json).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(422));
+
+        String jsonDeRespostaDaAPI = respostaDaRequisicao.andReturn().getResponse().getContentAsString();
+
+    }
 }
 
 
