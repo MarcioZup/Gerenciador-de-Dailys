@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -55,11 +56,10 @@ public class UsuarioService {
     }
 
     public Usuario exibirUsuarioPorSquad(String nomeDaSquad){
-        for(Usuario usuario : usuarioRepository.findAll()){
-            if(usuario.getNomeDaSquad().equals(nomeDaSquad)){
-                return usuario;
+        List<Usuario> usuarios = (List<Usuario>) usuarioRepository.findAll();
+            if(usuarios.equals(nomeDaSquad)){
+                return (Usuario) usuarios;
             }
-        }
         throw new UsuarioInexistente("Usuário não encontrado");
     }
 
