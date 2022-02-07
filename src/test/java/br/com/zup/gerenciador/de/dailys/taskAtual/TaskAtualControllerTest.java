@@ -50,9 +50,9 @@ public class TaskAtualControllerTest {
     @BeforeEach
     public void setup() {
         usuario = new Usuario();
-        usuario.setEmail("let.let@zup.com.br");
+        usuario.setEmail("user.user@zup.com.br");
         usuario.setSenha("Xablau123");
-        usuario.setNome("Let Marçal Matias");
+        usuario.setNome("User");
         usuario.setNomeDaSquad("Vivo");
 
         taskAtual = new TaskAtual();
@@ -79,7 +79,7 @@ public class TaskAtualControllerTest {
     }
 
     @Test
-    @WithMockUser("let.let@zup.com.br")
+    @WithMockUser("user.user@zup.com.br")
     public void testeDeletarTaskAtualNegativo() throws Exception {
         Mockito.doThrow(TaskAtualInexistente.class).when(taskAtualService).deletartaskAtual(Mockito.anyLong());
 
@@ -89,7 +89,7 @@ public class TaskAtualControllerTest {
     }
 
     @Test
-    @WithMockUser("marcio.viana@zup.com.br")
+    @WithMockUser("user.user@zup.com.br")
     public void testarDeletarTaskAtual() throws Exception {
         taskAtual.setId(Long.valueOf(1));
         Mockito.doNothing().when(taskAtualService).deletartaskAtual(Mockito.anyLong());
@@ -99,4 +99,29 @@ public class TaskAtualControllerTest {
 
         Mockito.verify(taskAtualService, Mockito.times(1)).deletartaskAtual(Mockito.anyLong());
     }
+    /*
+    @Test
+    @WithMockUser("karen.almeida@zup.com.br")
+    public void testarAlterarDescricaoImpedimentoNegativo() throws Exception {
+        doThrow(ImpedimentoInexistente.class).when(impedimentoService)
+                .alterarDescricaoImpedimento(anyLong(), any(ImpedimentoSaidaDTO.class));
+        String json = objectMapper.writeValueAsString(impedimentoDTO);
+
+        ResultActions resultado = mockMvc.perform(MockMvcRequestBuilders.put("/impedimento/1")
+                        .content(json).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(422));
+
+    }*/
+    @Test
+    @WithMockUser("user.user@zup.com.br")
+    public void testarAtualizarTaskAtualNegativo()throws Exception{
+        Mockito.doThrow(TaskAtualInexistente.class).when(taskAtualService)
+                .atualizarTaskAtual(Mockito.anyLong(), Mockito.any(TaskAtualSaidaDTO.class));
+        String json = objectMapper.writeValueAsString(taskAtualSaidaDTO);
+        ResultActions resultado = mockMvc.perform(MockMvcRequestBuilders.put("/taskAtual/1")
+                        .content(json).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(422));
+
+    }
+
 }
