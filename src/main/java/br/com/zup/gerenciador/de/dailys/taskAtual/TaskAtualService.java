@@ -1,6 +1,8 @@
 package br.com.zup.gerenciador.de.dailys.taskAtual;
 
+import br.com.zup.gerenciador.de.dailys.taskAtual.dtos.TaskAtualEntradaDTO;
 import br.com.zup.gerenciador.de.dailys.taskAtual.dtos.TaskAtualSaidaDTO;
+import br.com.zup.gerenciador.de.dailys.taskAtual.exception.TaskAtualInexistente;
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
 import br.com.zup.gerenciador.de.dailys.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,13 @@ public class TaskAtualService {
     @Autowired
     private UsuarioService usuarioService;
 
-    public TaskAtual salvarTaskAtual(String emailUsuario){
-        Usuario usuario = usuarioService.exibirUsuarioPorEmail(emailUsuario);
+    public TaskAtual salvarTaskAtual(TaskAtualEntradaDTO taskAtualEntradaDTO){
+        Usuario usuario = usuarioService.exibirUsuarioPorEmail(taskAtualEntradaDTO.getEmailUsuario());
         TaskAtual taskAtual = new TaskAtual();
         taskAtual.setUsuario(usuario);
+        taskAtual.setDescricao(taskAtualEntradaDTO.getDescricao());
+        taskAtual.setPrevisaoFim(taskAtualEntradaDTO.getPrevisaoFim());
+
         return taskAtualRepository.save(taskAtual);
     }
 
