@@ -1,12 +1,8 @@
-package br.com.zup.gerenciador.de.dailys.Impedimento;
+package br.com.zup.gerenciador.de.dailys.impedimento;
 
 import br.com.zup.gerenciador.de.dailys.config.componentes.Conversor;
 import br.com.zup.gerenciador.de.dailys.config.seguranca.UsuarioLoginService;
 import br.com.zup.gerenciador.de.dailys.config.seguranca.jwt.JwtComponent;
-import br.com.zup.gerenciador.de.dailys.impedimento.Impedimento;
-import br.com.zup.gerenciador.de.dailys.impedimento.ImpedimentoController;
-import br.com.zup.gerenciador.de.dailys.impedimento.ImpedimentoInexistente;
-import br.com.zup.gerenciador.de.dailys.impedimento.ImpedimentoService;
 import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoEntradaDTO;
 import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoSaidaDTO;
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
@@ -94,20 +90,6 @@ public class ImpedimentoControllerTest {
 
         verify(impedimentoService, times(1)).deletarImpedimento(anyLong());
     }
-
-    @Test
-    @WithMockUser("karen.almeida@zup.com.br")
-    public void testarAlterarDescricaoPositivo() throws Exception {
-        impedimento.setId(Long.valueOf(1));
-        doNothing().when(impedimentoService).alterarDescricaoImpedimento(anyLong(), Mockito.any(ImpedimentoSaidaDTO.class));
-        ResultActions resultado = mockMvc.perform(MockMvcRequestBuilders.put("/impedimento/")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().is(204));
-
-        verify(impedimentoService, times(1)).alterarDescricaoImpedimento(anyLong(), any(ImpedimentoSaidaDTO.class));
-    }
-
-
 
     @Test
     @WithMockUser("karen.almeida@zup.com.br")
