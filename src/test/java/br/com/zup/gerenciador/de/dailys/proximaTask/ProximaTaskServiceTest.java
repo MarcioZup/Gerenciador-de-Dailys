@@ -21,7 +21,7 @@ import java.util.Optional;
 import static org.mockito.Mockito.mock;
 
 @SpringBootTest
-public class ProximaTaskServiceTEST {
+public class ProximaTaskServiceTest {
 
     @MockBean
     private ProximaTaskRepository proximaTaskRepository;

@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
 
+
 @WebMvcTest({TaskAtualController.class, Conversor.class, UsuarioLoginService.class, JwtComponent.class})
 public class TaskAtualControllerTest {
 
@@ -74,29 +75,29 @@ public class TaskAtualControllerTest {
         taskAtualEntradaDTO.getPrevisaoFim();
 
 
-
         objectMapper = new ObjectMapper();
     }
 
     @Test
-    @WithMockUser("let.let@zup.com.br")
-    public void testeDeletarTaskAtualNegativo() throws Exception {
-        Mockito.doThrow(TaskAtualInexistente.class).when(taskAtualService).deletartaskAtual(Mockito.anyLong());
-
-        ResultActions resposta = mockMvc.perform(MockMvcRequestBuilders.delete("/proximaTask" +
-                        taskAtual.getId()).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().is(404));
-    }
-
-    @Test
-    @WithMockUser("marcio.viana@zup.com.br")
-    public void testarDeletarTaskAtual() throws Exception {
+    @WithMockUser("karen.almeida@zup.com.br")
+    public void testarDeletarTaskAtualPositivo() throws Exception {
         taskAtual.setId(Long.valueOf(1));
         Mockito.doNothing().when(taskAtualService).deletartaskAtual(Mockito.anyLong());
-        ResultActions resultado = mockMvc.perform(MockMvcRequestBuilders.delete("/taskAtual/" + taskAtual.getId())
+        ResultActions resultado = mockMvc.perform(MockMvcRequestBuilders.delete("/taskAtual/" +
+                                taskAtual.getId())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(204));
 
         Mockito.verify(taskAtualService, Mockito.times(1)).deletartaskAtual(Mockito.anyLong());
+    }
+
+    @Test
+    @WithMockUser("let.let@zup.com.br")
+    public void testeDeletarProximaTaskNegativo() throws Exception {
+        Mockito.doThrow(TaskAtualInexistente.class).when(taskAtualService).deletartaskAtual(Mockito.anyLong());
+
+        ResultActions resposta = mockMvc.perform(MockMvcRequestBuilders.delete("/taskAtual" +
+                        taskAtual.getId()).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(404));
     }
 }
