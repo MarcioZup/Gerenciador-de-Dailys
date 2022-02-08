@@ -95,7 +95,7 @@ public class  ProximaTaskControllerTest {
     }
 
     @Test
-    @WithMockUser("karen.almeida@zup.com.br")
+    @WithMockUser("let.let@zup.com.br")
     public void testarDeletarProximaTaskPositivo() throws Exception {
         proximaTask.setId(Long.valueOf(1));
         doNothing().when(proximaTaskService).deletarProximaTask(anyLong());
