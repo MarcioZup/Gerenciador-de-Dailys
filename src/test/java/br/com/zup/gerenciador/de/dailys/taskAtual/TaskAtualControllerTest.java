@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
 
+
 @WebMvcTest({TaskAtualController.class, Conversor.class, UsuarioLoginService.class, JwtComponent.class})
 public class TaskAtualControllerTest {
 
@@ -74,7 +75,6 @@ public class TaskAtualControllerTest {
         taskAtualEntradaDTO.getPrevisaoFim();
 
 
-
         objectMapper = new ObjectMapper();
     }
 
@@ -91,37 +91,15 @@ public class TaskAtualControllerTest {
     @Test
     @WithMockUser("user.user@zup.com.br")
     public void testarDeletarTaskAtual() throws Exception {
+
         taskAtual.setId(Long.valueOf(1));
         Mockito.doNothing().when(taskAtualService).deletartaskAtual(Mockito.anyLong());
-        ResultActions resultado = mockMvc.perform(MockMvcRequestBuilders.delete("/taskAtual/" + taskAtual.getId())
+        ResultActions resultado = mockMvc.perform(MockMvcRequestBuilders.delete("/taskAtual/" +
+                                taskAtual.getId())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(204));
 
         Mockito.verify(taskAtualService, Mockito.times(1)).deletartaskAtual(Mockito.anyLong());
-    }
-    /*
-    @Test
-    @WithMockUser("karen.almeida@zup.com.br")
-    public void testarAlterarDescricaoImpedimentoNegativo() throws Exception {
-        doThrow(ImpedimentoInexistente.class).when(impedimentoService)
-                .alterarDescricaoImpedimento(anyLong(), any(ImpedimentoSaidaDTO.class));
-        String json = objectMapper.writeValueAsString(impedimentoDTO);
-
-        ResultActions resultado = mockMvc.perform(MockMvcRequestBuilders.put("/impedimento/1")
-                        .content(json).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().is(422));
-
-    }*/
-    @Test
-    @WithMockUser("user.user@zup.com.br")
-    public void testarAtualizarTaskAtualNegativo()throws Exception{
-        Mockito.doThrow(TaskAtualInexistente.class).when(taskAtualService)
-                .atualizarTaskAtual(Mockito.anyLong(), Mockito.any(TaskAtualSaidaDTO.class));
-        String json = objectMapper.writeValueAsString(taskAtualSaidaDTO);
-        ResultActions resultado = mockMvc.perform(MockMvcRequestBuilders.put("/taskAtual/1")
-                        .content(json).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().is(422));
-
     }
 
 }

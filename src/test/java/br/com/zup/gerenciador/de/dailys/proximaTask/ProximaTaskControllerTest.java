@@ -24,7 +24,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 @WebMvcTest({ProximaTaskController.class, Conversor.class, UsuarioLoginService.class, JwtComponent.class})
 public class  ProximaTaskControllerTest {
@@ -90,6 +92,18 @@ public class  ProximaTaskControllerTest {
         ResultActions resposta = mockMvc.perform(MockMvcRequestBuilders.delete("/proximaTask" +
                         proximaTask.getId()).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is(404));
+    }
+
+    @Test
+    @WithMockUser("let.let@zup.com.br")
+    public void testarDeletarProximaTaskPositivo() throws Exception {
+        proximaTask.setId(Long.valueOf(1));
+        doNothing().when(proximaTaskService).deletarProximaTask(anyLong());
+        ResultActions resultado = mockMvc.perform(MockMvcRequestBuilders.delete("/proximaTask/" +
+                                proximaTask.getId()).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(204));
+
+        verify(proximaTaskService, times(1)).deletarProximaTask(anyLong());
     }
 
 }
