@@ -24,14 +24,13 @@ public class ProximaTaskService {
         proximaTask.setDescricao(proximaTaskEntradaDTO.getDescricao());
 
         return proximaTaskRepository.save(proximaTask);
-
     }
 
     public Iterable<ProximaTask> exibirProximasTasks() {
 
         return proximaTaskRepository.findAll();
-
     }
+
     public ProximaTask atualizarProximaTask(Long id, ProximaTaskSaidaDTO proximaTaskDTO){
 
         Optional<ProximaTask> proximaTaskOptional = proximaTaskRepository.findById(id);
@@ -53,7 +52,6 @@ public class ProximaTaskService {
         }
 
         proximaTaskRepository.deleteById(id);
-
     }
 
 }

@@ -1,6 +1,5 @@
 package br.com.zup.gerenciador.de.dailys.usuario;
 
-
 import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsuarioDTO;
 import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsuarioFiltroDTO;
 import org.modelmapper.ModelMapper;
@@ -9,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.awt.image.VolatileImage;
+import java.util.List;
 
 
 @RestController
@@ -36,9 +35,11 @@ public class UsuarioController {
     }
 
     @GetMapping("squad/{nomeDaSquad}")
-    public UsuarioFiltroDTO exibirUsuarioPorSquad(@PathVariable String nomeDaSquad) {
-        Usuario usuario = usuarioService.exibirUsuarioPorSquad(nomeDaSquad);
-        return modelMapper.map(usuario, UsuarioFiltroDTO.class);
+    public List<UsuarioFiltroDTO> exibirUsuarioPorSquad(@PathVariable String nomeDaSquad) {
+
+        List<UsuarioFiltroDTO> usuarios = usuarioService.exibirUsuarioPorSquad(nomeDaSquad);
+
+        return usuarios;
     }
 
     @DeleteMapping("/{email}")
@@ -53,7 +54,6 @@ public class UsuarioController {
             Usuario usuario = usuarioService.alterarDadosUsuario(email, usuarioDTO);
 
             return modelMapper.map(usuario,UsuarioFiltroDTO.class);
-
     }
 
 }
