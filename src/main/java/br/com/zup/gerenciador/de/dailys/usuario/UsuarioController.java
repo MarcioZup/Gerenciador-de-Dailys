@@ -3,6 +3,7 @@ package br.com.zup.gerenciador.de.dailys.usuario;
 
 import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsuarioDTO;
 import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsuarioFiltroDTO;
+import io.swagger.annotations.Api;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

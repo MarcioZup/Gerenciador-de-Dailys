@@ -9,11 +9,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -41,6 +43,21 @@ public class ConfiguracaoDeSeguranca extends WebSecurityConfigurerAdapter {
             "/impedimento"
     };
 
+    private static final String[] AUTH_WHITELIST = {
+            // -- Swagger UI v2
+            "/v2/api-docs",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**",
+            // -- Swagger UI v3 (OpenAPI)
+            "/v3/api-docs/**",
+            "/swagger-ui/**"
+            // other public endpoints of your API may be appended to this array
+    };
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
@@ -48,7 +65,10 @@ public class ConfiguracaoDeSeguranca extends WebSecurityConfigurerAdapter {
         httpSecurity.cors().configurationSource(configuracaoDoCORS());
 
         httpSecurity.authorizeRequests()
+                .antMatchers((AUTH_WHITELIST)).permitAll()
                 .antMatchers(HttpMethod.POST, ENDPOINT_POST_PUBLICO).permitAll()
+                .antMatchers("/v2/api-docs", "/swagger-resources/configuration/ui", "/swagger-resources",
+                        "/swagger-resources/configuration/security", "/swagger-ui/**", "/webjars/**").permitAll()
                 .and().authorizeRequests().antMatchers(HttpMethod.GET, ENDPOINT_GET_PUBLICO)
                 .permitAll().anyRequest().authenticated();
 
@@ -63,6 +83,20 @@ public class ConfiguracaoDeSeguranca extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
+    }
+    public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+        @Override
+        public void configure(WebSecurity web) throws Exception {
+            web.ignoring().antMatchers("/v2/api-docs",
+                    "/configuration/ui",
+                    "/swagger-resources/**",
+                    "/configuration/security",
+                    "/swagger-ui.html",
+                    "/webjars/**");
+        }
+
+
     }
 
     @Bean

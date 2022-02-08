@@ -51,9 +51,9 @@ public class TaskAtualControllerTest {
     @BeforeEach
     public void setup() {
         usuario = new Usuario();
-        usuario.setEmail("let.let@zup.com.br");
+        usuario.setEmail("user.user@zup.com.br");
         usuario.setSenha("Xablau123");
-        usuario.setNome("Let Marçal Matias");
+        usuario.setNome("User");
         usuario.setNomeDaSquad("Vivo");
 
         taskAtual = new TaskAtual();
@@ -79,8 +79,19 @@ public class TaskAtualControllerTest {
     }
 
     @Test
-    @WithMockUser("karen.almeida@zup.com.br")
-    public void testarDeletarTaskAtualPositivo() throws Exception {
+    @WithMockUser("user.user@zup.com.br")
+    public void testeDeletarTaskAtualNegativo() throws Exception {
+        Mockito.doThrow(TaskAtualInexistente.class).when(taskAtualService).deletartaskAtual(Mockito.anyLong());
+
+        ResultActions resposta = mockMvc.perform(MockMvcRequestBuilders.delete("/proximaTask" +
+                        taskAtual.getId()).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(404));
+    }
+
+    @Test
+    @WithMockUser("user.user@zup.com.br")
+    public void testarDeletarTaskAtual() throws Exception {
+
         taskAtual.setId(Long.valueOf(1));
         Mockito.doNothing().when(taskAtualService).deletartaskAtual(Mockito.anyLong());
         ResultActions resultado = mockMvc.perform(MockMvcRequestBuilders.delete("/taskAtual/" +
@@ -91,13 +102,4 @@ public class TaskAtualControllerTest {
         Mockito.verify(taskAtualService, Mockito.times(1)).deletartaskAtual(Mockito.anyLong());
     }
 
-    @Test
-    @WithMockUser("let.let@zup.com.br")
-    public void testeDeletarProximaTaskNegativo() throws Exception {
-        Mockito.doThrow(TaskAtualInexistente.class).when(taskAtualService).deletartaskAtual(Mockito.anyLong());
-
-        ResultActions resposta = mockMvc.perform(MockMvcRequestBuilders.delete("/taskAtual" +
-                        taskAtual.getId()).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().is(404));
-    }
 }

@@ -105,4 +105,5 @@ public class  ProximaTaskControllerTest {
 
         verify(proximaTaskService, times(1)).deletarProximaTask(anyLong());
     }
+
 }
