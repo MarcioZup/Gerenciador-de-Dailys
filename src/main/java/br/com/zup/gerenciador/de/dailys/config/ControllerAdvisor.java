@@ -2,10 +2,11 @@ package br.com.zup.gerenciador.de.dailys.config;
 
 import br.com.zup.gerenciador.de.dailys.impedimento.ImpedimentoInexistente;
 import br.com.zup.gerenciador.de.dailys.proximaTask.exception.ProximaTaskInexistente;
-import br.com.zup.gerenciador.de.dailys.taskAtual.TaskAtualInexistente;
-import br.com.zup.gerenciador.de.dailys.usuario.DominioNaoPermitidoException;
-import br.com.zup.gerenciador.de.dailys.usuario.EmailCadastrado;
-import br.com.zup.gerenciador.de.dailys.usuario.UsuarioInexistente;
+import br.com.zup.gerenciador.de.dailys.taskAtual.exception.TaskAtualInexistente;
+import br.com.zup.gerenciador.de.dailys.usuario.exception.DominioNaoPermitidoException;
+import br.com.zup.gerenciador.de.dailys.usuario.exception.EmailCadastrado;
+import br.com.zup.gerenciador.de.dailys.usuario.exception.SquadNaoEncontrada;
+import br.com.zup.gerenciador.de.dailys.usuario.exception.UsuarioInexistente;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
@@ -41,7 +42,13 @@ public class ControllerAdvisor {
 
     @ExceptionHandler(EmailCadastrado.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String retornoIdNaoEncontrado(EmailCadastrado exception) {
+    public String retornoEmailNãoCadastrado(EmailCadastrado exception) {
+        return exception.getMessage();
+    }
+
+    @ExceptionHandler(SquadNaoEncontrada.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String retornoSquadNaoEncontrada(SquadNaoEncontrada exception) {
         return exception.getMessage();
     }
 
