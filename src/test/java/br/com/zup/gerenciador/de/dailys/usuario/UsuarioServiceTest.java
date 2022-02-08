@@ -1,9 +1,9 @@
 package br.com.zup.gerenciador.de.dailys.usuario;
 
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
-import br.com.zup.gerenciador.de.dailys.usuario.UsuarioInexistente;
 import br.com.zup.gerenciador.de.dailys.usuario.UsuarioRepository;
 import br.com.zup.gerenciador.de.dailys.usuario.UsuarioService;
+import br.com.zup.gerenciador.de.dailys.usuario.exception.UsuarioInexistente;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

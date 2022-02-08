@@ -5,6 +5,7 @@ import br.com.zup.gerenciador.de.dailys.config.seguranca.UsuarioLoginService;
 import br.com.zup.gerenciador.de.dailys.config.seguranca.jwt.JwtComponent;
 import br.com.zup.gerenciador.de.dailys.taskAtual.dtos.TaskAtualEntradaDTO;
 import br.com.zup.gerenciador.de.dailys.taskAtual.dtos.TaskAtualSaidaDTO;
+import br.com.zup.gerenciador.de.dailys.taskAtual.exception.TaskAtualInexistente;
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
