@@ -32,4 +32,5 @@ public class UsuarioFiltroDTO {
     private List<ProximaTask> proximaTasks;
     @OneToMany(cascade = CascadeType.MERGE)
     private List<Impedimento> impedimentos;
+
 }

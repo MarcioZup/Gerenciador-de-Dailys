@@ -25,7 +25,6 @@ public class UsuarioLoginService implements UserDetailsService {
         Usuario usuario = usuarioOptional.get();
 
         return new UsuarioLogado(usuario.getEmail(), usuario.getSenha());
-
     }
 
 }

@@ -58,4 +58,5 @@ public class SwaggerConfig {
                 "API license URL",
                 Collections.emptyList());
     }
+
 }

@@ -1,9 +1,6 @@
 package br.com.zup.gerenciador.de.dailys.usuario;
 
-import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
-import br.com.zup.gerenciador.de.dailys.usuario.UsuarioInexistente;
-import br.com.zup.gerenciador.de.dailys.usuario.UsuarioRepository;
-import br.com.zup.gerenciador.de.dailys.usuario.UsuarioService;
+import br.com.zup.gerenciador.de.dailys.usuario.exceptions.UsuarioInexistente;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -75,7 +72,5 @@ public class UsuarioServiceTest {
     public void testeValidarEmail(){
         Assertions.assertTrue(usuario.getEmail().contains("@zup.com.br"));
     }
-
-
 
 }

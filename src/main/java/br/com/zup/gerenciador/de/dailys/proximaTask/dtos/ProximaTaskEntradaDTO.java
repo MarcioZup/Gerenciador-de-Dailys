@@ -26,4 +26,5 @@ public class ProximaTaskEntradaDTO {
     private String previsaoFim;
     @NotNull
     private String emailUsuario;
+
 }

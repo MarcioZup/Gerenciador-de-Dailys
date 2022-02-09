@@ -2,6 +2,7 @@ package br.com.zup.gerenciador.de.dailys.impedimento;
 
 import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoEntradaDTO;
 import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoSaidaDTO;
+import br.com.zup.gerenciador.de.dailys.impedimento.exception.ImpedimentoInexistente;
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
 import br.com.zup.gerenciador.de.dailys.usuario.UsuarioRepository;
 import org.junit.jupiter.api.Assertions;
@@ -29,9 +30,7 @@ import static org.mockito.Mockito.mock;
         private ImpedimentoService impedimentoService;
 
         private Impedimento impedimento;
-
         private Usuario usuario;
-
         private ImpedimentoSaidaDTO impedimentoSaidaDTO;
         private ImpedimentoEntradaDTO impedimentoEntradaDTO;
 
@@ -102,4 +101,5 @@ import static org.mockito.Mockito.mock;
             List<Impedimento> proximaTasksResposta = (List<Impedimento>) impedimentoService.exibirImpedimentos();
             Mockito.verify(impedimentoRepository, Mockito.times(1)).findAll();
         }
+
 }

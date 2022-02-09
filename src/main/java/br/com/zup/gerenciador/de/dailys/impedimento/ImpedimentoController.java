@@ -28,9 +28,7 @@ public class ImpedimentoController {
         Impedimento impedimento = impedimentoService.salvarImpedimento(impedimentoEntradaDTO);
 
         return modelMapper.map(impedimento, ImpedimentoSaidaDTO.class);
-
     }
-
 
     @GetMapping
     public List<ImpedimentoSaidaDTO> exibirImpedimentos(){
@@ -54,4 +52,5 @@ public class ImpedimentoController {
     public void deletarImpedimento(@PathVariable Long id){
         impedimentoService.deletarImpedimento(id);
     }
+
 }

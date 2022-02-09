@@ -45,12 +45,12 @@ public class  ProximaTaskControllerTest {
     private ProximaTaskSaidaDTO proximaTaskSaidaDTO;
     @Mock
     private ProximaTaskEntradaDTO proximaTaskEntradaDTO;
-
-    private ObjectMapper objectMapper;
     @Mock
     private ProximaTask proximaTask;
     @Mock
     private Usuario usuario;
+
+    private ObjectMapper objectMapper;
 
     @BeforeEach
     public void setup() {

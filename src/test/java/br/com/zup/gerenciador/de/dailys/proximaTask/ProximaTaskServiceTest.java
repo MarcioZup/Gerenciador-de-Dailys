@@ -4,7 +4,7 @@ import br.com.zup.gerenciador.de.dailys.proximaTask.dtos.ProximaTaskEntradaDTO;
 import br.com.zup.gerenciador.de.dailys.proximaTask.dtos.ProximaTaskSaidaDTO;
 import br.com.zup.gerenciador.de.dailys.proximaTask.exception.ProximaTaskInexistente;
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
-import br.com.zup.gerenciador.de.dailys.usuario.UsuarioInexistente;
+import br.com.zup.gerenciador.de.dailys.usuario.exceptions.UsuarioInexistente;
 import br.com.zup.gerenciador.de.dailys.usuario.UsuarioRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,11 +34,8 @@ public class ProximaTaskServiceTest {
     private ProximaTaskService proximaTaskService;
 
     private ProximaTask proximaTask;
-
     private Usuario usuario;
-
     private ProximaTaskSaidaDTO proximaTaskSaidaDTO;
-
 
     @BeforeEach
     private void setup(){

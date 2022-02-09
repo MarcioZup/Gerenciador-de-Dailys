@@ -73,4 +73,5 @@ public class UsuarioControllerTest {
         String jsonDeRespostaDaAPI = respostaDaRequisicao.andReturn().getResponse().getContentAsString();
 
     }
+
 }

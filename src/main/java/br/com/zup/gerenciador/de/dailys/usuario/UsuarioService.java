@@ -2,6 +2,10 @@ package br.com.zup.gerenciador.de.dailys.usuario;
 
 import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsuarioDTO;
 import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsuarioFiltroDTO;
+import br.com.zup.gerenciador.de.dailys.usuario.exceptions.DominioNaoPermitidoException;
+import br.com.zup.gerenciador.de.dailys.usuario.exceptions.EmailCadastrado;
+import br.com.zup.gerenciador.de.dailys.usuario.exceptions.SquadNaoEncontrada;
+import br.com.zup.gerenciador.de.dailys.usuario.exceptions.UsuarioInexistente;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -38,7 +42,6 @@ public class UsuarioService {
             throw new UsuarioInexistente("Usuario não encontrado");
         }
         usuarioRepository.deleteById(email);
-
     }
 
     public void validarEmail(String email) {
@@ -47,7 +50,6 @@ public class UsuarioService {
                 throw new EmailCadastrado("Email já cadastrado no DailyPoint");
             }
         }else throw new DominioNaoPermitidoException("Esse domínio não tem acesso permitido a esse sistema");
-
     }
 
     public Usuario exibirUsuarioPorEmail(String email) {
@@ -85,7 +87,6 @@ public class UsuarioService {
         usuarioRepository.save(usuarioParaAtualizar);
 
         return usuarioParaAtualizar;
-
     }
 
 }

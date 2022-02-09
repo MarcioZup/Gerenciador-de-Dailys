@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface ProximaTaskRepository extends CrudRepository<ProximaTask, Long> {
     Optional<ProximaTask> findById (Long id);
+
 }
