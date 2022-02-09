@@ -57,7 +57,6 @@ public class UsuarioController {
             Usuario usuario = usuarioService.alterarDadosUsuario(email, usuarioDTO);
 
             return modelMapper.map(usuario,UsuarioFiltroDTO.class);
-
     }
 
 }

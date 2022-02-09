@@ -26,7 +26,6 @@ public class FiltroDeAutorizacaoJwt extends BasicAuthenticationFilter {
         super(authenticationManager);
         this.jwtComponent = jwtComponent;
         this.userDetailsService = userDetailsService;
-
     }
 
     public UsernamePasswordAuthenticationToken pegarAutenticacao(String token){
@@ -39,7 +38,6 @@ public class FiltroDeAutorizacaoJwt extends BasicAuthenticationFilter {
         UserDetails usuarioLogado = userDetailsService.loadUserByUsername(claims.getSubject());
 
         return new UsernamePasswordAuthenticationToken(usuarioLogado, null, usuarioLogado.getAuthorities());
-
     }
 
     @Override

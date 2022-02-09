@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface ImpedimentoRepository extends CrudRepository<Impedimento, Long> {
     Optional<Impedimento> findById(Long id);
+
 }

@@ -5,6 +5,7 @@ import br.com.zup.gerenciador.de.dailys.config.seguranca.UsuarioLoginService;
 import br.com.zup.gerenciador.de.dailys.config.seguranca.jwt.JwtComponent;
 import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoEntradaDTO;
 import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoSaidaDTO;
+import br.com.zup.gerenciador.de.dailys.impedimento.exception.ImpedimentoInexistente;
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,14 +41,10 @@ public class ImpedimentoControllerTest {
     private ObjectMapper objectMapper;
     private ImpedimentoSaidaDTO impedimentoDTO;
 
-
-
-
     @Mock
     private Impedimento impedimento;
     @Mock
     private Usuario usuario;
-
 
     @BeforeEach
     public void setup() {
@@ -62,11 +59,7 @@ public class ImpedimentoControllerTest {
         impedimento.setDescricao("Anything");
         impedimento.setUsuario(usuario);
 
-
-
-
         objectMapper = new ObjectMapper();
-
     }
 
     @Test
@@ -115,7 +108,6 @@ public class ImpedimentoControllerTest {
                 .andExpect(MockMvcResultMatchers.status().is(422));
 
         String jsonDeRespostaDaAPI = respostaDaRequisicao.andReturn().getResponse().getContentAsString();
-
     }
 
 @Test
@@ -131,6 +123,7 @@ public class ImpedimentoControllerTest {
         String jsonDeResposta = respostaDaRequisicao.andReturn().getResponse().getContentAsString();
 
     }
+
 }
 
 

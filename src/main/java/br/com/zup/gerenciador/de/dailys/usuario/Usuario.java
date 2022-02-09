@@ -46,4 +46,5 @@ public class Usuario {
                 ", impedimentos=" + impedimentos +
                 '}';
     }
+
 }

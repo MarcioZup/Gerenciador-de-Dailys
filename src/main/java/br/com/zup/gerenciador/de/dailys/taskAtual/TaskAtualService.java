@@ -2,6 +2,7 @@ package br.com.zup.gerenciador.de.dailys.taskAtual;
 
 import br.com.zup.gerenciador.de.dailys.taskAtual.dtos.TaskAtualEntradaDTO;
 import br.com.zup.gerenciador.de.dailys.taskAtual.dtos.TaskAtualSaidaDTO;
+import br.com.zup.gerenciador.de.dailys.taskAtual.exception.TaskAtualInexistente;
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
 import br.com.zup.gerenciador.de.dailys.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,12 +1,12 @@
 package br.com.zup.gerenciador.de.dailys.config;
 
-import br.com.zup.gerenciador.de.dailys.impedimento.ImpedimentoInexistente;
+import br.com.zup.gerenciador.de.dailys.impedimento.exception.ImpedimentoInexistente;
 import br.com.zup.gerenciador.de.dailys.proximaTask.exception.ProximaTaskInexistente;
-import br.com.zup.gerenciador.de.dailys.taskAtual.TaskAtualInexistente;
-import br.com.zup.gerenciador.de.dailys.usuario.DominioNaoPermitidoException;
-import br.com.zup.gerenciador.de.dailys.usuario.EmailCadastrado;
-import br.com.zup.gerenciador.de.dailys.usuario.SquadNaoEncontrada;
-import br.com.zup.gerenciador.de.dailys.usuario.UsuarioInexistente;
+import br.com.zup.gerenciador.de.dailys.taskAtual.exception.TaskAtualInexistente;
+import br.com.zup.gerenciador.de.dailys.usuario.exceptions.DominioNaoPermitidoException;
+import br.com.zup.gerenciador.de.dailys.usuario.exceptions.EmailCadastrado;
+import br.com.zup.gerenciador.de.dailys.usuario.exceptions.SquadNaoEncontrada;
+import br.com.zup.gerenciador.de.dailys.usuario.exceptions.UsuarioInexistente;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
@@ -30,7 +30,6 @@ public class ControllerAdvisor {
             ErroValidacao erroValidacao = new ErroValidacao(referencia.getDefaultMessage(), referencia.getField());
             erros.add(erroValidacao);
         }
-
         return erros;
     }
 

@@ -10,4 +10,5 @@ import lombok.Setter;
 public class UsuarioSaidaTasksDTO {
     private String nome;
     private String email;
+
 }

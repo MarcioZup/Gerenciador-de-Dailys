@@ -50,4 +50,5 @@ public class TaskAtualController {
 
         return modelMapper.map(taskAtual, TaskAtualEntradaDTO.class);
     }
+
 }

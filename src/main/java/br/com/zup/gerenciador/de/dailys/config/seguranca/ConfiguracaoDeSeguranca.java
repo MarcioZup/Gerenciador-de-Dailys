@@ -77,13 +77,13 @@ public class ConfiguracaoDeSeguranca extends WebSecurityConfigurerAdapter {
         httpSecurity.addFilter(new FiltroDeAutenticacaoJwt(jwtComponent, authenticationManager()));
 
         httpSecurity.addFilter(new FiltroDeAutorizacaoJwt(authenticationManager(), jwtComponent, userDetailsService));
-
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
+
     public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         @Override
@@ -95,8 +95,6 @@ public class ConfiguracaoDeSeguranca extends WebSecurityConfigurerAdapter {
                     "/swagger-ui.html",
                     "/webjars/**");
         }
-
-
     }
 
     @Bean
@@ -105,14 +103,12 @@ public class ConfiguracaoDeSeguranca extends WebSecurityConfigurerAdapter {
         UrlBasedCorsConfigurationSource cors = new UrlBasedCorsConfigurationSource();
         cors.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
         return cors;
-
     }
 
     @Bean
     BCryptPasswordEncoder bCryptPasswordEncoder(){
 
         return new BCryptPasswordEncoder();
-
     }
 
 }

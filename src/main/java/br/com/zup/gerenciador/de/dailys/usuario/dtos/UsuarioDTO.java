@@ -38,4 +38,5 @@ public class UsuarioDTO {
     private List<TaskAtual> tasksAtuais;
     private List<ProximaTask> proximaTasks;
     private List<Impedimento> impedimentos;
+
 }

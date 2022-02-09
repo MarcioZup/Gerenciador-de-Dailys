@@ -26,7 +26,6 @@ public class ProximaTaskController {
         ProximaTask proximaTask = proximaTaskService.salvarProximaTask(proximaTaskEntradaDTO);
 
         return modelMapper.map(proximaTask, ProximaTaskSaidaDTO.class);
-
     }
 
     @GetMapping
@@ -39,7 +38,6 @@ public class ProximaTaskController {
             listasDeProximasTasks.add(proximaTaskDTO);
         }
         return listasDeProximasTasks;
-
     }
 
     @PutMapping("/{id}")
@@ -47,7 +45,6 @@ public class ProximaTaskController {
         ProximaTask proximaTask = proximaTaskService.atualizarProximaTask(id, proximaTaskDTO);
 
         return modelMapper.map(proximaTask, ProximaTaskSaidaDTO.class);
-
     }
 
     @DeleteMapping("/{id}")
@@ -55,7 +52,6 @@ public class ProximaTaskController {
     public void deletarProximaTask (@PathVariable Long id){
 
         proximaTaskService.deletarProximaTask(id);
-
     }
 
 }

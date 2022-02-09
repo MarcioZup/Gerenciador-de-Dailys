@@ -2,6 +2,7 @@ package br.com.zup.gerenciador.de.dailys.impedimento;
 
 import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoEntradaDTO;
 import br.com.zup.gerenciador.de.dailys.impedimento.dtos.ImpedimentoSaidaDTO;
+import br.com.zup.gerenciador.de.dailys.impedimento.exception.ImpedimentoInexistente;
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
 import br.com.zup.gerenciador.de.dailys.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,6 @@ public class ImpedimentoService {
         impedimento.setDescricao(impedimentoEntradaDTO.getDescricao());
 
         return impedimentoRepository.save(impedimento);
-
     }
 
     public Iterable<Impedimento>exibirImpedimentos(){
@@ -51,8 +51,6 @@ public class ImpedimentoService {
         impedimentoRepository.save(impedimentoParaAtualizar);
 
         return impedimentoParaAtualizar;
-
     }
-
 
 }
