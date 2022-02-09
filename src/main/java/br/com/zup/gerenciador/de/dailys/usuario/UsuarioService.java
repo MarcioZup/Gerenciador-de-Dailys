@@ -1,10 +1,13 @@
 package br.com.zup.gerenciador.de.dailys.usuario;
 
 import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsuarioDTO;
+import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsuarioFiltroDTO;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +18,8 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
     @Autowired
     BCryptPasswordEncoder encoder;
+    @Autowired
+    ModelMapper modelMapper;
 
     public Usuario salvarUsuario(Usuario usuario){
         validarEmail(usuario.getEmail());
@@ -54,12 +59,18 @@ public class UsuarioService {
         throw new UsuarioInexistente("Usuário não encontrado");
     }
 
-    public Usuario exibirUsuarioPorSquad(String nomeDaSquad){
-        List<Usuario> usuarios = (List<Usuario>) usuarioRepository.findAll();
-            if(usuarios.equals(nomeDaSquad)){
-                return (Usuario) usuarios;
-            }
-        throw new UsuarioInexistente("Usuário não encontrado");
+    public List<UsuarioFiltroDTO> exibirUsuarioPorSquad(String nomeDaSquad){
+        List<Usuario> usuarios = usuarioRepository.findByNomeDaSquad(nomeDaSquad);
+        List<UsuarioFiltroDTO> usuarioFiltroDTOList = new ArrayList<>();
+
+        if (usuarios.isEmpty()){
+            throw new SquadNaoEncontrada("Não foi encontrado Squad com este nome");
+        }
+        for (Usuario usuario : usuarios){
+            usuarioFiltroDTOList.add(modelMapper.map(usuario, UsuarioFiltroDTO.class));
+        }
+
+        return usuarioFiltroDTOList;
     }
 
     public Usuario alterarDadosUsuario(String email, UsuarioDTO usuarioNovo) {
