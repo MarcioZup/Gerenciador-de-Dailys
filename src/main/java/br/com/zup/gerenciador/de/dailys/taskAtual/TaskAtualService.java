@@ -5,6 +5,7 @@ import br.com.zup.gerenciador.de.dailys.taskAtual.dtos.TaskAtualSaidaDTO;
 import br.com.zup.gerenciador.de.dailys.taskAtual.exception.TaskAtualInexistente;
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
 import br.com.zup.gerenciador.de.dailys.usuario.UsuarioService;
+import br.com.zup.gerenciador.de.dailys.usuario.exceptions.UsuarioInexistente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +20,16 @@ public class TaskAtualService {
 
     public TaskAtual salvarTaskAtual(TaskAtualEntradaDTO taskAtualEntradaDTO){
         Usuario usuario = usuarioService.exibirUsuarioPorEmail(taskAtualEntradaDTO.getEmailUsuario());
-        TaskAtual taskAtual = new TaskAtual();
-        taskAtual.setUsuario(usuario);
-        taskAtual.setDescricao(taskAtualEntradaDTO.getDescricao());
-        taskAtual.setPrevisaoFim(taskAtualEntradaDTO.getPrevisaoFim());
+        if (taskAtualEntradaDTO.getEmailUsuario().equals(usuario.getEmail())) {
+            TaskAtual taskAtual = new TaskAtual();
+            taskAtual.setUsuario(usuario);
+            taskAtual.setDescricao(taskAtualEntradaDTO.getDescricao());
+            taskAtual.setPrevisaoFim(taskAtualEntradaDTO.getPrevisaoFim());
 
-        return taskAtualRepository.save(taskAtual);
+            return taskAtualRepository.save(taskAtual);
+
+        }
+        throw new UsuarioInexistente("Usuário não encontrado");
     }
 
     public Iterable<TaskAtual>exibirTasksAtuais(){
