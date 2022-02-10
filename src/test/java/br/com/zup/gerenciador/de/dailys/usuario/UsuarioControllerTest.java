@@ -8,6 +8,7 @@ import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
 import br.com.zup.gerenciador.de.dailys.usuario.UsuarioController;
 import br.com.zup.gerenciador.de.dailys.usuario.UsuarioService;
 import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsuarioDTO;
+import br.com.zup.gerenciador.de.dailys.usuario.dtos.UsuarioSaidaTasksDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -61,7 +63,7 @@ public class UsuarioControllerTest {
         objectMapper = new ObjectMapper();
     }
 
-    @Test
+   @Test
     public void testarRotaParaCadastrarUsuario() throws Exception {
         Mockito.when(usuarioService.salvarUsuario(Mockito.any(Usuario.class))).thenReturn(usuario);
         String json = objectMapper.writeValueAsString(usuarioDTO);
@@ -73,5 +75,7 @@ public class UsuarioControllerTest {
         String jsonDeRespostaDaAPI = respostaDaRequisicao.andReturn().getResponse().getContentAsString();
 
     }
+
+
 
 }

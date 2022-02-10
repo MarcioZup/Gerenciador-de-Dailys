@@ -8,6 +8,8 @@ import br.com.zup.gerenciador.de.dailys.proximaTask.dtos.ProximaTaskSaidaDTO;
 import br.com.zup.gerenciador.de.dailys.proximaTask.exception.ProximaTaskInexistente;
 import br.com.zup.gerenciador.de.dailys.usuario.Usuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -54,6 +56,7 @@ public class  ProximaTaskControllerTest {
 
     @BeforeEach
     public void setup() {
+        objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
         usuario = new Usuario();
         usuario.setEmail("let.let@zup.com.br");
         usuario.setSenha("Xablau123");
@@ -69,7 +72,7 @@ public class  ProximaTaskControllerTest {
 
         proximaTaskEntradaDTO = new ProximaTaskEntradaDTO();
         proximaTaskEntradaDTO.setDescricao("");
-        proximaTaskEntradaDTO.setDataInicio(LocalDate.now());
+        proximaTaskEntradaDTO.setDataInicio(LocalDate.of(2022,02,11));
         proximaTaskEntradaDTO.setPrevisaoFim("20-03-2022");
         proximaTaskEntradaDTO.setEmailUsuario("let.let@zup.com.br");
 
@@ -81,7 +84,9 @@ public class  ProximaTaskControllerTest {
         proximaTaskSaidaDTO.getUsuario();
 
 
-        objectMapper = new ObjectMapper();
+        ObjectMapper mapper = JsonMapper.builder()
+                .findAndAddModules()
+                .build();
     }
 
     @Test
@@ -104,6 +109,19 @@ public class  ProximaTaskControllerTest {
                 .andExpect(MockMvcResultMatchers.status().is(204));
 
         verify(proximaTaskService, times(1)).deletarProximaTask(anyLong());
+    }
+
+    @Test
+    @WithMockUser("karen.almeida@zup.com.br")
+    public void testarAtualizarProximaTaskNegativo() throws Exception {
+        doThrow(ProximaTaskInexistente.class).when(proximaTaskService)
+                .atualizarProximaTask(anyLong(), any(ProximaTaskSaidaDTO.class));
+        String json = objectMapper.writeValueAsString(proximaTaskSaidaDTO);
+
+        ResultActions resultado = mockMvc.perform(MockMvcRequestBuilders.put("/proximaTask/1")
+                        .content(json).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(404));
+
     }
 
 }
