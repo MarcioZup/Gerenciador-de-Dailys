@@ -9,6 +9,7 @@ import br.com.zup.gerenciador.de.dailys.usuario.exceptions.SquadNaoEncontrada;
 import br.com.zup.gerenciador.de.dailys.usuario.exceptions.UsuarioInexistente;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -51,7 +52,7 @@ public class ControllerAdvisor {
     }
 
     @ExceptionHandler(EmailCadastrado.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.CONFLICT)
     public HashMap<String, String> retornoEmailCadastrado(EmailCadastrado exception) {
         HashMap<String , String > map = new HashMap<>();
         map.put("mensagem:", exception.getMessage());
