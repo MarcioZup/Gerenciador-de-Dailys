@@ -9,6 +9,7 @@ import br.com.zup.gerenciador.de.dailys.usuario.exceptions.UsuarioInexistente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,8 +33,13 @@ public class TaskAtualService {
         throw new UsuarioInexistente("Usuário não encontrado");
     }
 
-    public Iterable<TaskAtual>exibirTasksAtuais(){
-        return taskAtualRepository.findAll();
+    public List<TaskAtual> exibirTasksAtuais(){
+        List<TaskAtual> taskAtuals = (List<TaskAtual>) taskAtualRepository.findAll();
+
+        if (taskAtuals.isEmpty()){
+            throw new TaskAtualInexistente("Task atual inexistente");
+        }
+        return taskAtuals;
     }
 
     public TaskAtual atualizarTaskAtual(Long id, TaskAtualSaidaDTO taskAtualDTO){
