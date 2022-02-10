@@ -40,7 +40,7 @@ public class ControllerAdvisor {
     }
 
     @ExceptionHandler(DominioNaoPermitidoException.class)
-    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     public String retornoIdNaoEncontrado(DominioNaoPermitidoException exception) {
         return exception.getMessage();
     }
@@ -64,7 +64,7 @@ public class ControllerAdvisor {
     }
 
     @ExceptionHandler(ImpedimentoInexistente.class)
-    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public String retornoStatusDiferente(ImpedimentoInexistente exception) {
         return exception.getMessage();
     }
