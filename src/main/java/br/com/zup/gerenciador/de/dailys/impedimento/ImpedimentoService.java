@@ -8,6 +8,7 @@ import br.com.zup.gerenciador.de.dailys.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,8 +27,13 @@ public class ImpedimentoService {
         return impedimentoRepository.save(impedimento);
     }
 
-    public Iterable<Impedimento>exibirImpedimentos(){
-        return impedimentoRepository.findAll();
+    public List<Impedimento> exibirImpedimentos(){
+        List<Impedimento> impedimentos = (List<Impedimento>) impedimentoRepository.findAll();
+        if (impedimentos.isEmpty()){
+            throw new ImpedimentoInexistente("Não há impedimentos cadastrados");
+        }
+
+        return impedimentos;
     }
 
 

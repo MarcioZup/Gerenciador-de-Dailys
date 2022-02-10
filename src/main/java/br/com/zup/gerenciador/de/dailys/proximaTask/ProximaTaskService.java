@@ -35,6 +35,7 @@ public class ProximaTaskService {
 
         return proximaTasks;
     }
+
     public ProximaTask atualizarProximaTask(Long id, ProximaTaskSaidaDTO proximaTaskDTO){
 
         Optional<ProximaTask> proximaTaskOptional = proximaTaskRepository.findById(id);
