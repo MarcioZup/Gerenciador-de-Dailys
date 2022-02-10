@@ -30,7 +30,7 @@ public class ProximaTaskService {
     public List<ProximaTask> exibirProximasTasks() {
         List<ProximaTask> proximaTasks = (List<ProximaTask>) proximaTaskRepository.findAll();
         if (proximaTasks.isEmpty()){
-            throw new ProximaTaskInexistente("Não há proximas tasks cadastradas");
+            throw new ProximaTaskInexistente("Não há próximas tasks cadastradas");
         }
 
         return proximaTasks;
