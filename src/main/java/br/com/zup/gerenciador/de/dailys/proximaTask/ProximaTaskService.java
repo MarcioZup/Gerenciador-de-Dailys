@@ -7,6 +7,7 @@ import br.com.zup.gerenciador.de.dailys.usuario.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,9 +27,13 @@ public class ProximaTaskService {
         return proximaTaskRepository.save(proximaTask);
     }
 
-    public Iterable<ProximaTask> exibirProximasTasks() {
+    public List<ProximaTask> exibirProximasTasks() {
+        List<ProximaTask> proximaTasks = (List<ProximaTask>) proximaTaskRepository.findAll();
+        if (proximaTasks.isEmpty()){
+            throw new ProximaTaskInexistente("Não há proximas tasks cadastradas");
+        }
 
-        return proximaTaskRepository.findAll();
+        return proximaTasks;
     }
     public ProximaTask atualizarProximaTask(Long id, ProximaTaskSaidaDTO proximaTaskDTO){
 
