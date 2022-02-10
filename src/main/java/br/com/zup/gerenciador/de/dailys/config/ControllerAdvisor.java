@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RestControllerAdvice
@@ -35,44 +36,58 @@ public class ControllerAdvisor {
 
     @ExceptionHandler(UsuarioInexistente.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String retornoIdNaoEncontrado(UsuarioInexistente exception) {
-        return exception.getMessage();
+    public HashMap<String, String> retornoUsuarioInexistente(UsuarioInexistente exception) {
+        HashMap<String , String > map = new HashMap<>();
+        map.put("mensagem:", exception.getMessage());
+        return map;
     }
 
     @ExceptionHandler(DominioNaoPermitidoException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    public String retornoIdNaoEncontrado(DominioNaoPermitidoException exception) {
-        return exception.getMessage();
+    public HashMap<String, String> retornoDominioNaoPermitidoException(DominioNaoPermitidoException exception) {
+        HashMap<String , String > map = new HashMap<>();
+        map.put("mensagem:", exception.getMessage());
+        return map;
     }
 
     @ExceptionHandler(EmailCadastrado.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String retornoIdNaoEncontrado(EmailCadastrado exception) {
-        return exception.getMessage();
+    public HashMap<String, String> retornoEmailCadastrado(EmailCadastrado exception) {
+        HashMap<String , String > map = new HashMap<>();
+        map.put("mensagem:", exception.getMessage());
+        return map;
     }
 
     @ExceptionHandler(SquadNaoEncontrada.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String retornoSquadNaoEncontrada(SquadNaoEncontrada exception) {
-        return exception.getMessage();
+    public HashMap<String, String> retornoSquadNaoEncontrada(SquadNaoEncontrada exception) {
+        HashMap<String , String > map = new HashMap<>();
+        map.put("mensagem:", exception.getMessage());
+        return map;
     }
 
     @ExceptionHandler(TaskAtualInexistente.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String retornoIdNaoEncontrado(TaskAtualInexistente exception) {
-        return exception.getMessage();
+    public HashMap<String, String> retornoTaskAtualInexistente(TaskAtualInexistente exception) {
+        HashMap<String , String > map = new HashMap<>();
+        map.put("mensagem:", exception.getMessage());
+        return map;
     }
 
     @ExceptionHandler(ImpedimentoInexistente.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String retornoStatusDiferente(ImpedimentoInexistente exception) {
-        return exception.getMessage();
+    public HashMap<String, String> retornoImpedimentoInexistente(ImpedimentoInexistente exception) {
+        HashMap<String , String > map = new HashMap<>();
+        map.put("mensagem:", exception.getMessage());
+        return map;
     }
 
     @ExceptionHandler(ProximaTaskInexistente.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String retornoStatusDiferente(ProximaTaskInexistente exception) {
-        return exception.getMessage();
+    public HashMap<String, String> retornoProximaTaskInexistente(ProximaTaskInexistente exception) {
+        HashMap<String , String > map = new HashMap<>();
+        map.put("mensagem:", exception.getMessage());
+        return map;
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
