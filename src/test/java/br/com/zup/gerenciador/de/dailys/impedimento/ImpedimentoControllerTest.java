@@ -69,7 +69,7 @@ public class ImpedimentoControllerTest {
 
         ResultActions resposta = mockMvc.perform(MockMvcRequestBuilders.delete("/impedimento/" + impedimento.getId())
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().is(422));
+                .andExpect(MockMvcResultMatchers.status().is(404));
     }
 
     @Test

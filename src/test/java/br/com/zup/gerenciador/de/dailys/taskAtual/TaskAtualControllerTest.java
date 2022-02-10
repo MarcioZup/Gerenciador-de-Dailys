@@ -3,6 +3,8 @@ package br.com.zup.gerenciador.de.dailys.taskAtual;
 import br.com.zup.gerenciador.de.dailys.config.componentes.Conversor;
 import br.com.zup.gerenciador.de.dailys.config.seguranca.UsuarioLoginService;
 import br.com.zup.gerenciador.de.dailys.config.seguranca.jwt.JwtComponent;
+import br.com.zup.gerenciador.de.dailys.proximaTask.dtos.ProximaTaskSaidaDTO;
+import br.com.zup.gerenciador.de.dailys.proximaTask.exception.ProximaTaskInexistente;
 import br.com.zup.gerenciador.de.dailys.taskAtual.dtos.TaskAtualEntradaDTO;
 import br.com.zup.gerenciador.de.dailys.taskAtual.dtos.TaskAtualSaidaDTO;
 import br.com.zup.gerenciador.de.dailys.taskAtual.exception.TaskAtualInexistente;
@@ -23,6 +25,10 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doThrow;
 
 
 @WebMvcTest({TaskAtualController.class, Conversor.class, UsuarioLoginService.class, JwtComponent.class})
