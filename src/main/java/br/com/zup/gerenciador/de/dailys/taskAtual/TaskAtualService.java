@@ -37,7 +37,7 @@ public class TaskAtualService {
         List<TaskAtual> taskAtuals = (List<TaskAtual>) taskAtualRepository.findAll();
 
         if (taskAtuals.isEmpty()){
-            throw new TaskAtualInexistente("Task atual inexistente");
+            throw new TaskAtualInexistente("Não há tasks atuais cadastradas");
         }
         return taskAtuals;
     }
